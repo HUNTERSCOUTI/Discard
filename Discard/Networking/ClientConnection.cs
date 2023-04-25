@@ -6,9 +6,9 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Discard.Networking
+namespace Client.Networking
 {
-    public class Client
+    public class ClientConnection
     {
         TcpClient Connection;
         const int PORT = 31337;

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Discard.MVVM.Views.UserControls;
+namespace Client.MVVM.Views.UserControls;
 
 public partial class Home : UserControl
 {

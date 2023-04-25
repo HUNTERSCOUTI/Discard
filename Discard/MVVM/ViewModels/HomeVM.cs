@@ -1,4 +1,4 @@
-﻿namespace Discard.MVVM.ViewModels;
+﻿namespace Client.MVVM.ViewModels;
 
 public class HomeVM
 {

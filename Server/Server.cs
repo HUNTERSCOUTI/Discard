@@ -16,6 +16,7 @@ namespace Server
 
         public void Start()
         {
+            // Open a tcp listener which allows any ip address to connect
             TcpListener listener = new(IPAddress.Any, PORT);
             listener.Start();
             Console.WriteLine($"Server: Lytter på port: {PORT}");
@@ -29,14 +30,14 @@ namespace Server
         public void NewClient(UserModel user)
         {
             Users.Add(user);
-            Thread thread = new Thread(() =>
+            Thread thread = new(() =>
             {
                 while (true)
                 {
                     try
                     {
                         string message = Receive(user.UserClient);
-                        Broadcast(message, user.UserClient);
+                        Broadcast(message, user);
                     }
                     catch
                     {
@@ -54,7 +55,6 @@ namespace Server
 
         public string Receive(TcpClient client)
         {
-
             NetworkStream stream = client.GetStream();
             byte[] buffer = new byte[4096];
             int read = stream.Read(buffer, 0, buffer.Length);
