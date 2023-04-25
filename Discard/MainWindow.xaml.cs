@@ -19,6 +19,7 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
+        //Fix, does not start WPF program on another thread
         Thread thread = new(InitializeComponent);
     }
 }
