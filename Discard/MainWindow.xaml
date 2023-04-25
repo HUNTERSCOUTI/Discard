@@ -17,8 +17,8 @@
             <Border CornerRadius="5">
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1">
-                        <GradientStop Color="#2e3967" />
-                        <GradientStop Color="#192559" Offset="1.0" />
+                        <GradientStop Color="#1e2124" />
+                        <GradientStop Color="#282b30" Offset="1.0" />
                     </LinearGradientBrush>
                 </Border.Background>
 
@@ -28,7 +28,6 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-
                     <!-- Status Bar -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 15 15 0">
                         <TextBlock Text="17:19" Foreground="#fdf9f6" FontSize="26" VerticalAlignment="Center" />
@@ -43,15 +42,33 @@
                     </StackPanel>
 
                     <!-- Page Title -->
-                    <TextBlock Grid.Row="0" Text="Hello" Style="{StaticResource PageTitle}" />
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Hello" Style="{StaticResource PageTitle}" />
 
-                    <!-- Page Content -->
-                    <ContentPresenter Grid.Row="2" x:Name="Container" HorizontalAlignment="Center">
-                        <!-- <ContentPresenter.Content> -->
-                        <!--     ~1~ <pages:About_Page></pages:About_Page> @1@ -->
-                        <!-- </ContentPresenter.Content> -->
-                    </ContentPresenter>
+                    <Grid Grid.Row="1" Margin="0 30 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
+                        <!-- Friend List -->
+                        <Border Grid.Row="1" Grid.Column="0" Height="600" Width="100" CornerRadius="25"
+                                HorizontalAlignment="Left">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1">
+                                    <GradientStop Color="#7289da" />
+                                    <GradientStop Color="#7289da" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <!-- Page Content -->
+                        <Border CornerRadius="55" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1"
+                                Grid.Column="1"
+                                Background="red" Height="600" 
+                                Width="1200" Margin="10 0 20 0">
+                        </Border>
+
+                    </Grid>
 
                 </Grid>
             </Border>
