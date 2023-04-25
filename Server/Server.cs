@@ -64,16 +64,18 @@ namespace Server
             return recieve;
         }
 
-        public void Broadcast(string message, TcpClient sender)
+        public void Broadcast(string message, UserModel sender)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(message);
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+            byte[] senderNameBytes = Encoding.UTF8.GetBytes(sender.Name);
 
             foreach (UserModel user in Users)
             {
-                if (user.UserClient.Connected && user.UserClient.Equals(sender) == false)
+                if (user.UserClient.Connected && user.UserClient.Equals(sender.UserClient) == false)
                 {
                     NetworkStream stream = user.UserClient.GetStream();
-                    stream.Write(bytes);
+                    stream.Write(messageBytes);
+                    stream.Write(senderNameBytes);
                 }
             }
         }
