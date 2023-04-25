@@ -33,6 +33,9 @@ namespace Discard.Networking
             Console.WriteLine("Connected To Server");
         }
 
+        /// <summary>
+        /// Responsible for always writing others users messages
+        /// </summary>
         public void Listener()
         {
             byte[] buffer = new byte[4096];
