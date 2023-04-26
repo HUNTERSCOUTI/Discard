@@ -22,4 +22,9 @@ public partial class MainWindow : Window
         //Fix, does not start WPF program on another thread
         Thread thread = new(InitializeComponent);
     }
+
+    private void MoveWindow(object sender, MouseButtonEventArgs e)
+    {
+        this.DragMove();
+    }
 }
