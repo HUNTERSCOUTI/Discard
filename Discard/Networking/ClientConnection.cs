@@ -34,7 +34,7 @@ namespace Client.Networking
         }
 
         /// <summary>
-        /// Responsible for always writing others users messages
+        /// Responsible for getting the stream from the server and displaying it.
         /// </summary>
         public void Listener()
         {
@@ -45,7 +45,7 @@ namespace Client.Networking
             {
                 int read = stream.Read(buffer, 0, buffer.Length);
                 string messageFromServer = Encoding.UTF8.GetString(buffer, 0, read);
-                Console.WriteLine(messageFromServer);
+                //MAKE displayable on WPF HERE
 
                 buffer = new byte[4096];
             }
