@@ -16,9 +16,10 @@ namespace DiscardSERVER.Class_Models
         public bool IsOnline { get; set; }
         public List<FriendModel>? FriendList { get; set; }
 
-        public UserModel(TcpClient userClient)
+        public UserModel(TcpClient userClient, string ip)
         {
             UserClient = userClient;
+            UserIP = ip;
         }
     }
 }
