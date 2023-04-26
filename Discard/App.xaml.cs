@@ -12,9 +12,7 @@ public partial class App : Application
 {
     public App()
     {
-        // ClientConnection client = new();
-        //
-        // client.Run();
+        
     }
 }
 
