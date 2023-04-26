@@ -8,8 +8,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Client.Networking;
 
-namespace Discard;
+namespace Client;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -18,6 +19,7 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        InitializeComponent();
+        //Fix, does not start WPF program on another thread
+        Thread thread = new(InitializeComponent);
     }
 }
