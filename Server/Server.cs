@@ -23,7 +23,9 @@ namespace Server
             while (true)
             {
                 TcpClient client = listener.AcceptTcpClient();
-                NewClient(new UserModel(client));
+                IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
+                Console.WriteLine("IP: {0}", remoteIpEndPoint.Address);
+                NewClient(new UserModel(client)); 
             }
         }
 
@@ -41,8 +43,8 @@ namespace Server
                     }
                     catch
                     {
-                        if(!user.UserClient.Connected)
-                            Console.WriteLine("User Disconnected");
+                        if (!user.UserClient.Connected)
+                            DisconnectClient(user);
                         else
                             Console.WriteLine("Message Error");
                         break;
@@ -51,6 +53,13 @@ namespace Server
             });
             thread.Start();
             Console.WriteLine("New User Connected");
+        }
+
+        public void DisconnectClient(UserModel user)
+        {
+            Console.WriteLine($"{user.Name} has disconnected from the server");
+
+            user.UserClient.Close();
         }
 
         public string Receive(TcpClient client)

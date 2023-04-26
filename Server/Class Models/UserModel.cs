@@ -10,6 +10,7 @@ namespace DiscardSERVER.Class_Models
     public class UserModel
     {
         public TcpClient UserClient { get; set; }
+        public string? UserIP { get; set; }
         public int UserID { get; set; }
         public string Name { get; set; }
         public bool IsOnline { get; set; }
