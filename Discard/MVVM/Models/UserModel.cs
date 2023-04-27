@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Sockets;
+using DiscardSERVER.Class_Models;
 
-namespace DiscardSERVER.Class_Models
+#pragma warning disable
+namespace Client.MVVM.Models
 {
     public class UserModel
     {

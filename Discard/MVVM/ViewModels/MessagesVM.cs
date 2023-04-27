@@ -2,6 +2,7 @@
 using Client.MVVM.Utilities;
 using DiscardSERVER.Class_Models;
 
+#pragma warning disable
 namespace Client.MVVM.ViewModels;
 
 public class MessagesVM : ViewModelBase

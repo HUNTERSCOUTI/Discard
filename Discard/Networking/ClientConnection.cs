@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+#pragma warning disable
 namespace Client.Networking
 {
     public class ClientConnection

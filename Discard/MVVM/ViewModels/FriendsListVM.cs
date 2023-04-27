@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Client.MVVM.Utilities;
 using DiscardSERVER.Class_Models;
 
+#pragma warning disable
 namespace Client.MVVM.ViewModels;
 
 public class FriendsListVM : ViewModelBase
@@ -48,7 +49,7 @@ public class FriendsListVM : ViewModelBase
     {
         if (obj is FriendModel friend)
             new MessagesVM(friend);
-        
+
         return;
     }
 
