@@ -26,12 +26,12 @@
 
                     <StackPanel Orientation="Vertical">
 
-                        <StackPanel.CommandBindings>
-                            <CommandBinding
-                                Command="{Binding Path=DataContext.FriendCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
-                            </CommandBinding>
-
-                        </StackPanel.CommandBindings>
+                        <StackPanel.InputBindings>
+                            <MouseBinding Gesture="LeftClick"
+                                          Command="{Binding Path= DataContext.FriendCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                          CommandParameter="{Binding}">
+                            </MouseBinding>
+                        </StackPanel.InputBindings>
 
                         <TextBlock Text="{Binding Path= FriendID}" FontSize="40" Foreground="#36393e" />
 

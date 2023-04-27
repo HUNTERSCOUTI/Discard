@@ -46,8 +46,10 @@ public class FriendsListVM : ViewModelBase
 
     private void FriendCLicked(Object obj)
     {
-        if (obj is FriendModel friend) return;
-        // var a = new MessagesVM(friend);
+        if (obj is FriendModel friend)
+            new MessagesVM(friend);
+        
+        return;
     }
 
     #endregion
