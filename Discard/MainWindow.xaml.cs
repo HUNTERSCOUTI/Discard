@@ -19,10 +19,17 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        ClientConnection client = new();
+        try
+        {
+            ClientConnection client = new();
 
-        Thread thread = new(client.Run);
-        thread.Start();
+            Thread thread = new(client.Run);
+            thread.Start();
+        }
+        catch (Exception e)
+        {
+            System.Windows.MessageBox.Show("Could Not Connect to the Server");
+        }
 
         //Fix, does not start WPF program on another thread
         InitializeComponent();
