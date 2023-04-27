@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Client.MVVM.Utilities;
 using DiscardSERVER.Class_Models;
 
@@ -8,14 +9,14 @@ public class FriendsListVM : ViewModelBase
 {
     #region Properties
 
-    private object _currentView = new HomeVM();
+    private object _messagesView = new HomeVM();
 
-    public object CurrentView
+    public object MessagesView
     {
-        get => _currentView;
+        get => _messagesView;
         set
         {
-            _currentView = value;
+            _messagesView = value;
             OnPropertyChanged();
         }
     }
@@ -27,7 +28,7 @@ public class FriendsListVM : ViewModelBase
         get => _friends;
         set
         {
-            _currentView = value;
+            _messagesView = value;
             OnPropertyChanged();
         }
     }
@@ -35,14 +36,48 @@ public class FriendsListVM : ViewModelBase
     #endregion
 
 
+    #region ICommands
+
+    public ICommand FriendCommand { get; set; }
+
+    #endregion
+
+    #region
+
+    private void FriendCLicked(Object obj)
+    {
+        if (obj is FriendModel friend) return;
+        // var a = new MessagesVM(friend);
+    }
+
+    #endregion
+
     public FriendsListVM()
     {
+        FriendCommand = new RelayCommand(FriendCLicked);
+        _fakeFriends();
+    }
+
+    private void _fakeFriends()
+    {
         _friends = new ObservableCollection<FriendModel>();
-        _friends.Add(new FriendModel());
-        _friends.Add(new FriendModel());
-        _friends.Add(new FriendModel());
-        _friends.Add(new FriendModel());
-        _friends.Add(new FriendModel());
-        
+
+        for (int i = 0; i < 20; i++)
+        {
+            FriendModel friend = new FriendModel();
+
+            Random r = new Random();
+            int rInt = r.Next(); //for ints
+            friend.FriendID = rInt;
+
+            string[] messages = new string[11];
+            for (int j = 0; j < 10; j++)
+            {
+                messages[j] = ($"Message {j}");
+            }
+
+            friend.Messages = (messages);
+            _friends.Add(friend);
+        }
     }
 }
