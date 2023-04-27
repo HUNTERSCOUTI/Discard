@@ -48,7 +48,7 @@
 
                             <Image>
                                 <Image.Source>
-                                    <BitmapImage DecodePixelWidth="40" UriSource="{Binding Path=ProfilePicture}" />
+                                    <BitmapImage DecodePixelWidth="40" UriSource="{Binding Path=ProfilePictureURL}" />
                                 </Image.Source>
                             </Image>
 

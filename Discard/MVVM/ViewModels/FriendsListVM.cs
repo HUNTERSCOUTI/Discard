@@ -10,7 +10,7 @@ public class FriendsListVM : ViewModelBase
 {
     #region Properties
 
-    private object _messagesView = new HomeVM();
+    private object _messagesView = new MainVM();
 
     public object MessagesView
     {
@@ -68,7 +68,7 @@ public class FriendsListVM : ViewModelBase
         for (int i = 0; i < 20; i++)
         {
             FriendModel friend = new FriendModel();
-
+            
             Random r = new Random();
             int rInt = r.Next(); //for ints
             friend.FriendID = rInt;
@@ -79,6 +79,8 @@ public class FriendsListVM : ViewModelBase
                 messages[j] = ($"Message {j}");
             }
 
+
+            friend.ProfilePictureURL = "https://generated.photos/face-generator";
             friend.Messages = (messages);
             _friends.Add(friend);
         }
