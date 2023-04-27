@@ -4,99 +4,104 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:vm="clr-namespace:Client.MVVM.ViewModels"
-        xmlns:local="clr-namespace:Client"
+        xmlns:pages="clr-namespace:Client.MVVM.Views.UserControls"
         mc:Ignorable="d"
         Height="720" Width="1280" MinWidth="650" MinHeight="700" AllowsTransparency="True"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
-    <Window.DataContext>
-        <vm:HomeVM></vm:HomeVM>
-    </Window.DataContext>
 
-    <Grid>
-        <Border CornerRadius="15">
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1">
-                    <GradientStop Color="#1e2124" />
-                    <GradientStop Color="#282b30" Offset="1.0" />
-                </LinearGradientBrush>
-            </Border.Background>
+    <Border CornerRadius="15">
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.5,1">
+                <GradientStop Color="#1e2124" />
+                <GradientStop Color="#282b30" Offset="1.0" />
+            </LinearGradientBrush>
+        </Border.Background>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
 
-                <!-- Status Bar -->
-                <Grid Width="1280" MinWidth="650">
-                    <Grid.Resources>
-                        <Style TargetType="Grid">
-                            <EventSetter Event="MouseDown" Handler="MoveWindow" />
-                        </Style>
-                    </Grid.Resources>
+            <!-- Status Bar -->
+            <Grid Width="1280" MinWidth="650">
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <EventSetter Event="MouseDown" Handler="MoveWindow" />
+                    </Style>
+                </Grid.Resources>
 
-                    <DockPanel Height="40">
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Discard" FontSize="22"
-                                   Style="{StaticResource PageTitle}"
-                                   HorizontalAlignment="Left" />
+                <DockPanel Height="40">
+                    <TextBlock Text="Discard" FontSize="22"
+                               Style="{StaticResource PageTitle}"
+                               HorizontalAlignment="Left" />
 
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <!-- Page Title -->
-                            <TextBlock Text="17:19" Foreground="#fdf9f6" FontSize="26" VerticalAlignment="Center" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <!-- Page Title -->
+                        <TextBlock Text="17:19" Foreground="#fdf9f6" FontSize="26" VerticalAlignment="Center" />
 
-                            <StackPanel Margin="13 0" VerticalAlignment="Center">
-                                <TextBlock Text="17, April" Foreground="#f8fefa" FontSize="10" />
-                                <TextBlock Text="Søndag" Foreground="#f8fefa" FontSize="10" />
-                            </StackPanel>
-
-                            <icon:PackIconMaterial Kind="WeatherSunset" Foreground="#fdf9f6" Width="25"
-                                                   VerticalAlignment="Center" />
+                        <StackPanel Margin="13 0" VerticalAlignment="Center">
+                            <TextBlock Text="17, April" Foreground="#f8fefa" FontSize="10" />
+                            <TextBlock Text="Søndag" Foreground="#f8fefa" FontSize="10" />
                         </StackPanel>
-                    </DockPanel>
-                </Grid>
 
+                        <icon:PackIconMaterial Kind="WeatherSunset" Foreground="#fdf9f6" Width="25"
+                                               VerticalAlignment="Center" />
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
 
-                <Grid Grid.Row="1" Margin="0 30 0 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition MaxWidth="120" />
-                        <ColumnDefinition MaxWidth="22222" />
-                    </Grid.ColumnDefinitions>
+            <!-- Content -->
+            <Grid Grid.Row="1" Margin="0 30 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition MinWidth="400" Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                    <!-- Friend List -->
-                    <Border Grid.Column="0" Height="600" Width="100" CornerRadius="25"
-                            HorizontalAlignment="Left">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1">
-                                <GradientStop Color="#7289da" />
-                                <GradientStop Color="#7289da" Offset="1.0" />
-                            </LinearGradientBrush>
-                        </Border.Background>
-                    </Border>
+                <!-- Friend List -->
+                <Border Grid.Column="0" Height="600" Width="100" CornerRadius="25"
+                        HorizontalAlignment="Left">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1">
+                            <GradientStop Color="#7289da" />
+                            <GradientStop Color="#7289da" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
 
-                    <!-- Page Content -->
-                    <Border CornerRadius="55" HorizontalAlignment="Right" VerticalAlignment="Center"
-                            Grid.Column="1" Margin="10 0 20 0"
-                            Height="600" MinWidth="400" MinHeight="300">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1">
-                                <GradientStop Color="#424549" />
-                                <GradientStop Color="#36393e" Offset="1.0" />
-                            </LinearGradientBrush>
-                        </Border.Background>
+                    <ContentPresenter HorizontalAlignment="Center">
+                        <ContentPresenter.Content>
+                            <pages:FriendsList></pages:FriendsList>
+                        </ContentPresenter.Content>
+                    </ContentPresenter>
+                </Border>
 
-                        <ContentControl Content="{Binding CurrentView}" />
-                    </Border>
+                <!-- FriendList and Messages -->
+                <Border CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Grid.Column="1" Margin="10 0 20 0"
+                        Width="1100" Height="600" MinHeight="300" MinWidth="500">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1">
+                            <GradientStop Color="#424549" />
+                            <GradientStop Color="#36393e" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
 
-                </Grid>
+                    <ContentPresenter HorizontalAlignment="Center">
+                        <ContentPresenter.Content>
+                            <pages:Messages></pages:Messages>
+                        </ContentPresenter.Content>
+                    </ContentPresenter>
+
+                </Border>
 
             </Grid>
-        </Border>
 
-    </Grid>
+        </Grid>
+
+    </Border>
+
 </Window>
