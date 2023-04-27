@@ -18,7 +18,7 @@
             </LinearGradientBrush>
         </Border.Background>
 
-        <ListBox ItemsSource="{Binding FriendList }" Background="Transparent">
+        <ListBox ItemsSource="{Binding FriendList }" Background="Transparent" Style="{StaticResource ListBoxStyle1}">
 
             <ListBox.ItemTemplate>
 
