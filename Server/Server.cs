@@ -53,7 +53,6 @@ namespace Server
                         break;
                     }
                 }
-                //DisconnectClient(user);
             });
             thread.Start();
             Console.WriteLine("New User Connected");
