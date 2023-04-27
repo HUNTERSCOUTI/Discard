@@ -5,19 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:Client.MVVM.ViewModels"
              xmlns:local="clr-namespace:Client.MVVM.Views.UserControls"
-             mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             Height="600" Width="100">
     <UserControl.DataContext>
         <vm:FriendsListVM />
     </UserControl.DataContext>
 
-    <Grid>
-        <ListBox ItemsSource="{Binding Friends }">
+    <Border>
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.5,1">
+                <GradientStop Color="#7289da" />
+                <GradientStop Color="#7289da" Offset="1.0" />
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <ListBox ItemsSource="{Binding FriendList }" Background="Transparent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" />
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Path= FriendID}" FontSize="40" Foreground="#36393e" />
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </Grid>
+    </Border>
 </UserControl>
