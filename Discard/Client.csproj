@@ -12,8 +12,4 @@
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MVVM\Models\" />
-  </ItemGroup>
-
 </Project>

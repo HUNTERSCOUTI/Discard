@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:local="clr-namespace:Client"
+        xmlns:pages="clr-namespace:Client.MVVM.Views.UserControls"
         mc:Ignorable="d"
         Height="720" Width="1280" MinWidth="650" MinHeight="700" AllowsTransparency="True"
         WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent">
@@ -12,24 +12,36 @@
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
-    <Grid>
-        <Grid>
-            <Border CornerRadius="5">
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0.5,1">
-                        <GradientStop Color="#1e2124" />
-                        <GradientStop Color="#282b30" Offset="1.0" />
-                    </LinearGradientBrush>
-                </Border.Background>
+    <Border CornerRadius="15">
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.5,1">
+                <GradientStop Color="#1e2124" />
+                <GradientStop Color="#282b30" Offset="1.0" />
+            </LinearGradientBrush>
+        </Border.Background>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <!-- Status Bar -->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 15 15 0">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+
+            <!-- Status Bar -->
+            <Grid Width="1280" MinWidth="650">
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <EventSetter Event="MouseDown" Handler="MoveWindow" />
+                    </Style>
+                </Grid.Resources>
+
+                <DockPanel Height="40">
+                    <TextBlock Text="Discard" FontSize="22"
+                               Style="{StaticResource PageTitle}"
+                               HorizontalAlignment="Left" />
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <!-- Page Title -->
                         <TextBlock Text="17:19" Foreground="#fdf9f6" FontSize="26" VerticalAlignment="Center" />
 
                         <StackPanel Margin="13 0" VerticalAlignment="Center">
@@ -40,39 +52,56 @@
                         <icon:PackIconMaterial Kind="WeatherSunset" Foreground="#fdf9f6" Width="25"
                                                VerticalAlignment="Center" />
                     </StackPanel>
+                </DockPanel>
+            </Grid>
 
-                    <!-- Page Title -->
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Hello" Style="{StaticResource PageTitle}" />
+            <!-- Content -->
+            <Grid Grid.Row="1" Margin="0 30 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition MinWidth="400" Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Row="1" Margin="0 30 0 0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                <!-- Friend List -->
+                <Border Grid.Column="0" Height="600" Width="100" CornerRadius="25"
+                        HorizontalAlignment="Left">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1">
+                            <GradientStop Color="#7289da" />
+                            <GradientStop Color="#7289da" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
 
-                        <!-- Friend List -->
-                        <Border Grid.Row="1" Grid.Column="0" Height="600" Width="100" CornerRadius="25"
-                                HorizontalAlignment="Left">
-                            <Border.Background>
-                                <LinearGradientBrush EndPoint="0.5,1">
-                                    <GradientStop Color="#7289da" />
-                                    <GradientStop Color="#7289da" Offset="1.0" />
-                                </LinearGradientBrush>
-                            </Border.Background>
-                        </Border>
+                    <ContentPresenter HorizontalAlignment="Center">
+                        <ContentPresenter.Content>
+                            <pages:FriendsList></pages:FriendsList>
+                        </ContentPresenter.Content>
+                    </ContentPresenter>
+                </Border>
 
-                        <!-- Page Content -->
-                        <Border CornerRadius="55" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1"
-                                Grid.Column="1"
-                                Background="red" Height="600" 
-                                Width="1200" Margin="10 0 20 0">
-                        </Border>
+                <!-- FriendList and Messages -->
+                <Border CornerRadius="25" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Grid.Column="1" Margin="10 0 20 0"
+                        Width="1100" Height="600" MinHeight="300" MinWidth="500">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1">
+                            <GradientStop Color="#424549" />
+                            <GradientStop Color="#36393e" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
 
-                    </Grid>
+                    <ContentPresenter HorizontalAlignment="Center">
+                        <ContentPresenter.Content>
+                            <pages:Messages></pages:Messages>
+                        </ContentPresenter.Content>
+                    </ContentPresenter>
 
-                </Grid>
-            </Border>
+                </Border>
+
+            </Grid>
 
         </Grid>
-    </Grid>
+
+    </Border>
+
 </Window>

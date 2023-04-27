@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="Client.MVVM.Views.UserControls.FriendsList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Client.MVVM.ViewModels"
+             xmlns:local="clr-namespace:Client.MVVM.Views.UserControls"
+             Height="600" Width="100">
+    <UserControl.DataContext>
+        <vm:FriendsListVM />
+    </UserControl.DataContext>
+
+    <Border>
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.5,1">
+                <GradientStop Color="#7289da" />
+                <GradientStop Color="#7289da" Offset="1.0" />
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <ListBox ItemsSource="{Binding FriendList }" Background="Transparent">
+
+            <ListBox.ItemTemplate>
+
+                <DataTemplate>
+
+                    <StackPanel Orientation="Vertical">
+
+                        <StackPanel.InputBindings>
+                            <MouseBinding Gesture="LeftClick"
+                                          Command="{Binding Path= DataContext.FriendCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                          CommandParameter="{Binding}">
+                            </MouseBinding>
+                        </StackPanel.InputBindings>
+
+                        <TextBlock Text="{Binding Path= FriendID}" FontSize="40" Foreground="#36393e" />
+
+                    </StackPanel>
+
+                </DataTemplate>
+
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
+    </Border>
+
+</UserControl>

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Client.MVVM.Views.UserControls.Messages"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Client.MVVM.ViewModels"
+             Width="1100" Height="600" MinHeight="300" MinWidth="500" Background="Transparent">
+    <UserControl.DataContext>
+        <vm:MessagesVM></vm:MessagesVM>
+    </UserControl.DataContext>
+
+
+    <Border HorizontalAlignment="Center" VerticalAlignment="Center"
+            Grid.Column="1" Margin="10 0 20 0"
+            Width="1100" Height="600" MinHeight="300" MinWidth="500">
+        <Border.Background>
+            <LinearGradientBrush EndPoint="0.5,1">
+                <GradientStop Color="#424549" />
+                <GradientStop Color="#36393e" Offset="1.0" />
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <ListView Foreground="Transparent" Background="Transparent" DataContext="{Binding Path=Messages}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding}" Style="{StaticResource AboutText}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Border>
+
+</UserControl>
