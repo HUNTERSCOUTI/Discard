@@ -59,7 +59,7 @@
                 <DockPanel Height="40" Width="Auto">
                     <StackPanel Orientation="Horizontal">
 
-                        < StackPanel.InputBindings>
+                        <StackPanel.InputBindings>
                             <MouseBinding Command="{Binding HomeCommand}" Gesture="leftClick" />
                         </StackPanel.InputBindings>
 
