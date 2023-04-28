@@ -12,6 +12,7 @@ namespace Client.MVVM.ViewModels;
 
 public class MainVM
 {
+    public static Object CurrentView { get; set; }
     public static UserModel CurrentUser { get; set; }
 
     #region ICommands
@@ -45,6 +46,8 @@ public class MainVM
 
     #endregion
 
+    #region Constructor
+
     public MainVM()
     {
         MoveWindowCommand = new RelayCommand(MoveWindow);
@@ -53,11 +56,14 @@ public class MainVM
         _tmpUser();
         _tmpFriends();
         _tmpMessages();
+
+        CurrentView = new WelcomeVM();
     }
 
     private void _tmpUser()
     {
         CurrentUser = new UserModel();
+        CurrentUser.Name = "John Doe";
 
         https: //randomuser.me/api/portraits/men/12.jpg;
         string imageUrl = "https://randomuser.me/api/portraits/";
@@ -105,4 +111,6 @@ public class MainVM
             friend.Messages = (messages);
         }
     }
+
+    #endregion
 }
