@@ -41,7 +41,7 @@
 
 
             <!--  Status Bar  -->
-            <Grid MinWidth="650" Width="1280">
+            <Grid MinWidth="Auto" Width="">
                 <Grid.Resources>
                     <Style TargetType="Grid">
                         <EventSetter Event="MouseDown" Handler="MoveWindow" />
@@ -55,7 +55,7 @@
                         Gesture="" />
                 </Grid.InputBindings>
 
-                <DockPanel Height="40" Width="300">
+                <DockPanel Height="40" Width="Auto">
                     <TextBlock
                         FontSize="22"
                         HorizontalAlignment="Left"
@@ -63,6 +63,9 @@
                         Text="Discard" />
 
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+
+                        <Image Source="{Binding Path=CurrentUser.ProfilePictureURL}" Width="50" />
+
                         <!--  Page Title  -->
                         <TextBlock
                             FontSize="26"
