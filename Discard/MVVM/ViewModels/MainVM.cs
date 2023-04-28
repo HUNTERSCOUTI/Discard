@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -10,19 +12,42 @@ using DiscardSERVER.Class_Models;
 #pragma warning disable
 namespace Client.MVVM.ViewModels;
 
-public class MainVM
+public class MainVM : ViewModelBase
 {
-    public static Object CurrentView { get; set; }
+    private static Object _currentView { get; set; }
+
+    public static Object CurrentView
+    {
+        get => _currentView;
+        set
+        {
+            _currentView = value;
+            OnPropertyChanged("CurrentView");
+        }
+    }
+
     public static UserModel CurrentUser { get; set; }
+
+    public static void ChangeView(Object obj)
+    {
+        // if (obj is MessagesVM() messageView)
+        //     CurrentView = new (messageView());
+
+        var a = _currentView;
+        var b = CurrentView;
+    }
 
     #region ICommands
 
     public ICommand MoveWindowCommand  { get; set; }
     public ICommand CloseWindowCommand { get; set; }
+    public ICommand HomeCommand { get; set; }
 
     #endregion
 
-    #region Commands Function
+    #region Commands Functions
+
+    private void Home(Object obj) => CurrentView = new WelcomeVM();
 
     private void MoveWindow(Object obj)
     {
@@ -30,19 +55,7 @@ public class MainVM
             window.DragMove();
     }
 
-    private void CloseWindow(Object obj)
-    {
-        try
-        {
-            Application.Current.Shutdown();
-        }
-        catch (Exception e)
-        {
-            //throws an exception if the application doesnt close
-            MessageBox.Show("Could Not Close the Application", "Error");
-            throw;
-        }
-    }
+    private void CloseWindow(Object obj) => Application.Current.Shutdown();
 
     #endregion
 
@@ -50,6 +63,7 @@ public class MainVM
 
     public MainVM()
     {
+        HomeCommand = new RelayCommand(Home);
         MoveWindowCommand = new RelayCommand(MoveWindow);
         CloseWindowCommand = new RelayCommand(CloseWindow);
 
@@ -57,7 +71,7 @@ public class MainVM
         _tmpFriends();
         _tmpMessages();
 
-        CurrentView = new WelcomeVM();
+        _currentView = new WelcomeVM();
     }
 
     private void _tmpUser()
@@ -110,6 +124,26 @@ public class MainVM
 
             friend.Messages = (messages);
         }
+    }
+
+    #endregion
+
+    #region PropertyChanged
+
+    public static event PropertyChangedEventHandler StaticPropertyChanged;
+
+    // Define static OnPropertyChanged method
+    private static void OnPropertyChanged(string name)
+    {
+        StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
+    }
+
+    // Implement INotifyPropertyChanged interface
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    private void OnPropertyChangedInstance(string name)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 
     #endregion
