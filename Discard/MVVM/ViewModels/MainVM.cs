@@ -1,10 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Client.MVVM.Models;
 using Client.MVVM.Utilities;
 using DiscardSERVER.Class_Models;
 
+#pragma warning disable
 namespace Client.MVVM.ViewModels;
 
 public class MainVM
@@ -28,8 +31,16 @@ public class MainVM
 
     private void CloseWindow(Object obj)
     {
-        if (obj is Window window)
-            window.Close();
+        try
+        {
+            Application.Current.Shutdown();
+        }
+        catch (Exception e)
+        {
+            //throws an exception if the application doesnt close
+            MessageBox.Show("Could Not Close the Application", "Error");
+            throw;
+        }
     }
 
     #endregion
@@ -40,12 +51,23 @@ public class MainVM
         CloseWindowCommand = new RelayCommand(CloseWindow);
 
         _tmpUser();
+        _tmpFriends();
+        _tmpMessages();
     }
 
     private void _tmpUser()
     {
         CurrentUser = new UserModel();
-        CurrentUser.ProfilePictureURL = "https://generated.photos/face-generator";
+
+        https: //randomuser.me/api/portraits/men/12.jpg;
+        string imageUrl = "https://randomuser.me/api/portraits/";
+
+        if (new Random().Next(1, 3) == 1)
+            imageUrl += $"women/{new Random().Next(1, 99)}.jpg";
+        else
+            imageUrl += $"men/{new Random().Next(1, 99)}.jpg";
+
+        CurrentUser.ProfilePictureURL = new BitmapImage(new Uri(imageUrl));
     }
 
     private void _tmpFriends()
@@ -54,9 +76,17 @@ public class MainVM
         {
             FriendModel friend = new FriendModel();
 
-            Random r = new Random();
-            int rInt = r.Next(); //for ints
-            friend.FriendID = rInt;
+            friend.FriendID = new Random().Next();
+
+            https: //randomuser.me/api/portraits/men/12.jpg;
+            string imageUrl = "https://randomuser.me/api/portraits/";
+
+            if (new Random().Next(1, 3) == 1)
+                imageUrl += $"women/{new Random().Next(1, 99)}.jpg";
+            else
+                imageUrl += $"men/{new Random().Next(1, 99)}.jpg";
+
+            friend.ProfilePictureURL = new BitmapImage(new Uri(imageUrl));
 
             CurrentUser.FriendList.Add(friend);
         }
@@ -66,17 +96,12 @@ public class MainVM
     {
         foreach (FriendModel friend in CurrentUser.FriendList)
         {
-            Random r = new Random();
-            int rInt = r.Next(); //for ints
-            friend.FriendID = rInt;
-
             string[] messages = new string[11];
             for (int j = 0; j < 10; j++)
             {
-                messages[j] = ($"Message {j}");
+                messages[j] = ($"{friend.FriendID} : Message Sample {j * new Random().Next()}");
             }
 
-            CurrentUser.ProfilePictureURL = "https://generated.photos/face-generator";
             friend.Messages = (messages);
         }
     }
