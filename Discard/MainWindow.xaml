@@ -161,11 +161,11 @@
                         </LinearGradientBrush>
                     </Border.Background>
 
-                    <ContentPresenter HorizontalAlignment="Center">
-                        <ContentPresenter.Content>
-                            <pages:Messages />
-                        </ContentPresenter.Content>
-                    </ContentPresenter>
+                    <StackPanel>
+
+                        <ContentControl Content="{Binding CurrentView}" HorizontalAlignment="Center" />
+
+                    </StackPanel>
 
                 </Border>
 
