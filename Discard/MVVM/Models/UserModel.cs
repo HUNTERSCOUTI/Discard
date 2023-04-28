@@ -1,4 +1,5 @@
 ﻿using System.Net.Sockets;
+using System.Windows.Media;
 using DiscardSERVER.Class_Models;
 
 #pragma warning disable
@@ -10,7 +11,7 @@ namespace Client.MVVM.Models
         public int UserID { get; set; }
         public string Name { get; set; }
         public bool IsOnline { get; set; }
-        public string ProfilePictureURL { get; set; }
+        public ImageSource ProfilePictureURL { get; set; }
         public List<FriendModel>? FriendList { get; set; }
 
         public UserModel(TcpClient userClient)
