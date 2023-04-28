@@ -8,10 +8,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:vm="clr-namespace:Client.MVVM.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <UserControl.DataContext>
-        <vm:MessagesVM />
-    </UserControl.DataContext>
-
 
     <Border
         Grid.Column="1"
@@ -29,18 +25,31 @@
             </LinearGradientBrush>
         </Border.Background>
 
-        <ListView
-            Background="Transparent"
-            DataContext="{Binding Path=Messages}"
-            Foreground="Transparent">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource AboutText}" Text="{Binding}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+
+        <TextBlock
+            FontSize="55"
+            Padding="55"
+            Text="{Binding Path=FriendName}"
+            TextWrapping="WrapWithOverflow" />
+
+        <!--  Style="{StaticResource AboutText}"  -->
+
+        <!--    -->
+        <!--  <ListView  -->
+        <!--  Background="Transparent"  -->
+        <!--  DataContext="{Binding Path=Messages}"  -->
+        <!--  Foreground="Transparent">  -->
+        <!--     <ListView.ItemTemplate> -->
+        <!--         <DataTemplate> -->
+        <!--             <StackPanel> -->
+        <!--  <TextBlock  -->
+        <!--  FontSize="55"  -->
+        <!--  Style="{StaticResource AboutText}"  -->
+        <!--  Text=" Binding}" />  -->
+        <!--             </StackPanel> -->
+        <!--         </DataTemplate> -->
+        <!--     </ListView.ItemTemplate> -->
+        <!-- </ListView> -->
 
     </Border>
 

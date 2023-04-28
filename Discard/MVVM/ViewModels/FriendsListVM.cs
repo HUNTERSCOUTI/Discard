@@ -9,27 +9,15 @@ namespace Client.MVVM.ViewModels;
 public class FriendsListVM : ViewModelBase
 {
     #region Properties
-
-    private object _messagesView = new MainVM();
-
-    public object MessagesView
-    {
-        get => _messagesView;
-        set
-        {
-            _messagesView = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private ObservableCollection<FriendModel> _friends { get; set; }
+    
+    private ObservableCollection<FriendModel> _friendsList { get; set; }
 
     public ObservableCollection<FriendModel> FriendList
     {
-        get => _friends;
+        get => _friendsList;
         set
         {
-            _messagesView = value;
+            _friendsList = value;
             OnPropertyChanged();
         }
     }
@@ -48,9 +36,9 @@ public class FriendsListVM : ViewModelBase
     private void FriendCLicked(Object obj)
     {
         if (obj is FriendModel friend)
-            new MessagesVM(friend);
-
-        return;
+            MainVM.CurrentView = new MessagesVM(friend);
+        else
+            return;
     }
 
     #endregion
@@ -58,7 +46,7 @@ public class FriendsListVM : ViewModelBase
     public FriendsListVM()
     {
         FriendCommand = new RelayCommand(FriendCLicked);
-        
-        _friends = new(MainVM.CurrentUser.FriendList);
+
+        _friendsList = new(MainVM.CurrentUser.FriendList);
     }
 }

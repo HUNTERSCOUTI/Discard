@@ -9,6 +9,18 @@ public class MessagesVM : ViewModelBase
 {
     #region Properties
 
+    private string _friendName { get; set; }
+
+    public string FriendName
+    {
+        get => this._friendName;
+        set
+        {
+            this._friendName = value;
+            OnPropertyChanged();
+        }
+    }
+
     private ObservableCollection<string> _messages { get; set; }
 
     public ObservableCollection<string> Messages
@@ -27,17 +39,20 @@ public class MessagesVM : ViewModelBase
 
     public MessagesVM(FriendModel friend)
     {
-        this._messages = new ObservableCollection<string>();
-
-        foreach (string message in friend.Messages)
+        try
         {
-            Messages.Add(message);
+            this.FriendName = friend.FriendID.ToString();
+            this._messages = new ObservableCollection<string>();
+
+            foreach (string message in friend.Messages)
+            {
+                Messages.Add(message);
+            }
         }
-    }
-
-
-    public MessagesVM()
-    {
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 
     #endregion
