@@ -32,24 +32,23 @@
                     <StackPanel Orientation="Vertical">
 
                         <Border
-                            BorderBrush="Black"
+                            BorderBrush="#424549"
                             BorderThickness="2"
-                            CornerRadius="15"
-                            Padding="10">
+                            Margin="1,11,0,0">
 
-                            <Border.InputBindings>
 
-                                <MouseBinding
-                                    Command="{Binding Path=DataContext.FriendCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                    CommandParameter="{Binding}"
-                                    Gesture="LeftClick" />
+                            <Image
+                                Height="50"
+                                Source="{Binding Path=ProfilePictureURL}"
+                                Width="50">
 
-                            </Border.InputBindings>
+                                <Image.InputBindings>
 
-                            <Image>
-                                <Image.Source>
-                                    <BitmapImage DecodePixelWidth="40" UriSource="{Binding Path=ProfilePictureURL}" />
-                                </Image.Source>
+                                    <MouseBinding
+                                        Command="{Binding Path=DataContext.FriendCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                        CommandParameter="{Binding}"
+                                        Gesture="LeftClick" />
+                                </Image.InputBindings>
                             </Image>
 
                         </Border>
