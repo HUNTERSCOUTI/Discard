@@ -41,7 +41,7 @@
 
 
             <!--  Status Bar  -->
-            <Grid MinWidth="Auto" Width="">
+            <Grid MinWidth="600" Width="1200">
                 <Grid.Resources>
                     <Style TargetType="Grid">
                         <EventSetter Event="MouseDown" Handler="MoveWindow" />
