@@ -58,5 +58,7 @@ public class FriendsListVM : ViewModelBase
     public FriendsListVM()
     {
         FriendCommand = new RelayCommand(FriendCLicked);
+        
+        _friends = new(MainVM.CurrentUser.FriendList);
     }
 }
