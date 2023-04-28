@@ -3,4 +3,9 @@
 public class WelcomeVM
 {
     public string CurrentUserName { get; set; }
+
+    public WelcomeVM()
+    {
+        CurrentUserName = MainVM.CurrentUser.Name;
+    }
 }

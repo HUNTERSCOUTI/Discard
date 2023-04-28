@@ -6,7 +6,12 @@
     Width="1110"
     x:Class="Client.MVVM.Views.UserControls.WelcomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:vm="clr-namespace:Client.MVVM.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <UserControl.DataContext>
+        <vm:WelcomeVM />
+    </UserControl.DataContext>
     <Border>
         <Border.Background>
             <LinearGradientBrush EndPoint="0.5,1">
@@ -18,10 +23,10 @@
         </Border.Background>
 
         <TextBlock
-            FontSize="115"
+            FontSize="100"
             Foreground="Wheat"
             HorizontalAlignment="Center"
-            Text="Welcome DickHead"
+            Text="{Binding CurrentUserName, StringFormat='Welcome {0}!'}"
             VerticalAlignment="Center" />
 
 
