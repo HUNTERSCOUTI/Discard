@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="TextBlock" x:Key="PageTitle">
+        <Setter Property="Foreground" Value="#ffffff" />
+        <Setter Property="Grid.Row" Value="1" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="42" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="AboutText">
+        <Setter Property="Foreground" Value="#FBF9F6" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0,10" />
+    </Style>
+</ResourceDictionary>

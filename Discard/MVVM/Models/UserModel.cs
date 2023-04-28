@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Sockets;
+using System.Windows.Media;
+using DiscardSERVER.Class_Models;
 
-namespace DiscardSERVER.Class_Models
+#pragma warning disable
+namespace Client.MVVM.Models
 {
     public class UserModel
     {
@@ -13,11 +11,19 @@ namespace DiscardSERVER.Class_Models
         public int UserID { get; set; }
         public string Name { get; set; }
         public bool IsOnline { get; set; }
+        public ImageSource ProfilePictureURL { get; set; }
         public List<FriendModel>? FriendList { get; set; }
 
         public UserModel(TcpClient userClient)
         {
             UserClient = userClient;
+            this.FriendList = new();
+        }
+
+        public UserModel()
+        {
+            this.UserClient = new();
+            this.FriendList = new();
         }
     }
 }

@@ -1,11 +1,13 @@
-﻿<UserControl x:Class="Client.MVVM.Views.UserControls.FriendsList"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:Client.MVVM.ViewModels"
-             xmlns:local="clr-namespace:Client.MVVM.Views.UserControls"
-             Height="600" Width="100">
+﻿<UserControl
+    Height="600"
+    Width="100"
+    x:Class="Client.MVVM.Views.UserControls.FriendsList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Client.MVVM.Views.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Client.MVVM.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.DataContext>
         <vm:FriendsListVM />
     </UserControl.DataContext>
@@ -18,7 +20,10 @@
             </LinearGradientBrush>
         </Border.Background>
 
-        <ListBox ItemsSource="{Binding FriendList }" Background="Transparent">
+        <ListBox
+            Background="Transparent"
+            ItemsSource="{Binding FriendList}"
+            Style="{StaticResource ListBoxStyle1}">
 
             <ListBox.ItemTemplate>
 
@@ -26,15 +31,27 @@
 
                     <StackPanel Orientation="Vertical">
 
-                        <StackPanel.InputBindings>
-                            <MouseBinding Gesture="LeftClick"
-                                          Command="{Binding Path= DataContext.FriendCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                          CommandParameter="{Binding}">
-                            </MouseBinding>
-                        </StackPanel.InputBindings>
+                        <Border
+                            BorderBrush="#424549"
+                            BorderThickness="2"
+                            Margin="1,11,0,0">
 
-                        <TextBlock Text="{Binding Path= FriendID}" FontSize="40" Foreground="#36393e" />
 
+                            <Image
+                                Height="50"
+                                Source="{Binding Path=ProfilePictureURL}"
+                                Width="50">
+
+                                <Image.InputBindings>
+
+                                    <MouseBinding
+                                        Command="{Binding Path=DataContext.FriendCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                        CommandParameter="{Binding}"
+                                        Gesture="LeftClick" />
+                                </Image.InputBindings>
+                            </Image>
+
+                        </Border>
                     </StackPanel>
 
                 </DataTemplate>

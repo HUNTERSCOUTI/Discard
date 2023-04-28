@@ -2,9 +2,9 @@
 
 namespace Client.MVVM.Views.UserControls;
 
-public partial class Home : UserControl
+public partial class WelcomePage : UserControl
 {
-    public Home()
+    public WelcomePage()
     {
         InitializeComponent();
     }
