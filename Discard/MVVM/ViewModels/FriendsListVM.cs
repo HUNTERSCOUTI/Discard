@@ -58,31 +58,5 @@ public class FriendsListVM : ViewModelBase
     public FriendsListVM()
     {
         FriendCommand = new RelayCommand(FriendCLicked);
-        _fakeFriends();
-    }
-
-    private void _fakeFriends()
-    {
-        _friends = new ObservableCollection<FriendModel>();
-
-        for (int i = 0; i < 20; i++)
-        {
-            FriendModel friend = new FriendModel();
-            
-            Random r = new Random();
-            int rInt = r.Next(); //for ints
-            friend.FriendID = rInt;
-
-            string[] messages = new string[11];
-            for (int j = 0; j < 10; j++)
-            {
-                messages[j] = ($"Message {j}");
-            }
-
-
-            friend.ProfilePictureURL = "https://generated.photos/face-generator";
-            friend.Messages = (messages);
-            _friends.Add(friend);
-        }
     }
 }
