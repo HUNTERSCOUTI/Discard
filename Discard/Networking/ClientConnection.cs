@@ -1,4 +1,9 @@
 ﻿#pragma warning disable
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Windows;
+
 namespace Client.Networking
 {
     public class ClientConnection
