@@ -1,16 +1,26 @@
-﻿<UserControl x:Class="Client.MVVM.Views.UserControls.Messages"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:Client.MVVM.ViewModels"
-             Width="1100" Height="600" MinHeight="300" MinWidth="500" Background="Transparent">
-    <UserControl.DataContext>
-        <vm:MessagesVM></vm:MessagesVM>
-    </UserControl.DataContext>
+﻿<UserControl
+    Background="Transparent"
+    Height="600"
+    MinHeight="300"
+    MinWidth="500"
+    Width="1100"
+    d:DataContext="{d:DesignInstance Type=vm:MessagesVM}"
+    mc:Ignorable="d"
+    x:Class="Client.MVVM.Views.UserControls.Messages"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Client.MVVM.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-
-    <Border HorizontalAlignment="Center" VerticalAlignment="Center"
-            Grid.Column="1" Margin="10 0 20 0"
-            Width="1100" Height="600" MinHeight="300" MinWidth="500">
+    <Border
+        Grid.Column="1"
+        Height="600"
+        HorizontalAlignment="Center"
+        MinHeight="300"
+        MinWidth="500"
+        VerticalAlignment="Center"
+        Width="1100">
         <Border.Background>
             <LinearGradientBrush EndPoint="0.5,1">
                 <GradientStop Color="#424549" />
@@ -18,16 +28,49 @@
             </LinearGradientBrush>
         </Border.Background>
 
-        <ListView Foreground="Transparent" Background="Transparent" DataContext="{Binding Path=Messages}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding}" Style="{StaticResource AboutText}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <StackPanel>
+            <DockPanel
+                Background="#36393e"
+                VerticalAlignment="Top"
+                Width="1100">
 
+                <Image
+                    Margin="0,0,10,0"
+                    Source="{Binding Path=ProfilePicture}"
+                    Width="60" />
+                <TextBlock
+                    FontSize="40"
+                    Height="55"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource AboutText}"
+                    Text="{Binding Path=FriendName}" />
+            </DockPanel>
+
+            <!--  Style="{StaticResource AboutText}"  -->
+
+            <ListView
+                Background="Transparent"
+                Foreground="Yellow"
+                Height="500"
+                HorizontalContentAlignment="Center"
+                ItemsSource="{Binding Path=Messages}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectionMode="Single"
+                VerticalAlignment="Bottom">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock
+                                FontSize="22"
+                                Style="{StaticResource AboutText}"
+                                Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackPanel>
     </Border>
 
 </UserControl>

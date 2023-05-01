@@ -1,7 +1,4 @@
-﻿using System.Net;
-using System.Net.Sockets;
-using System.Text;
-
+﻿#pragma warning disable
 namespace Client.Networking
 {
     public class ClientConnection
@@ -21,12 +18,19 @@ namespace Client.Networking
 
         public void Connect(IPAddress ip, int port)
         {
-            Connection = new TcpClient();
-            Connection.Connect(ip, port);
+            try
+            {
+                Connection = new TcpClient();
+                Connection.Connect(ip, port);
 
-            Thread thread = new Thread(Listener);
-            thread.Start();
-            Console.WriteLine("Connected To Server");
+                Thread thread = new Thread(Listener);
+                thread.Start();
+                Console.WriteLine("Connected To Server");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Could Not Connect to the Server");
+            }
         }
 
         /// <summary>
