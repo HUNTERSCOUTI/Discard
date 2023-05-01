@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.Networking
 {
@@ -15,7 +11,7 @@ namespace Client.Networking
 
         public void Run()
         {
-            Connect(IPAddress.Loopback, PORT);
+            Connect(IPAddress.Parse("192.168.1.153"), PORT);
             while (true)
             {
                 string send = Console.ReadLine();
