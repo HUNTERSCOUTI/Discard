@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using System.Windows.Media;
 using Client.MVVM.Utilities;
 using DiscardSERVER.Class_Models;
 
@@ -10,13 +12,23 @@ public class MessagesVM : ViewModelBase
     #region Properties
 
     private string _friendName { get; set; }
-
     public string FriendName
     {
         get => this._friendName;
         set
         {
             this._friendName = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private ImageSource _profilePicture { get; set; }
+    public ImageSource ProfilePicture
+    {
+        get => this._profilePicture;
+        set
+        {
+            _profilePicture = value;
             OnPropertyChanged();
         }
     }
@@ -42,6 +54,7 @@ public class MessagesVM : ViewModelBase
         try
         {
             this.FriendName = friend.FriendID.ToString();
+            this.ProfilePicture = friend.ProfilePictureURL;
             this._messages = new ObservableCollection<string>();
 
             foreach (string message in friend.Messages)

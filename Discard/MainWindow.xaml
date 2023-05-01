@@ -2,10 +2,11 @@
     AllowsTransparency="True"
     Background="Transparent"
     Height="720"
-    Icon="file:///C:/Users/Kevin/source/Repos/Discard/Discard/Media/Images/Discard-Logo.png"
+    Icon="media/Images/Discard-Logo.png"
     MinHeight="700"
     MinWidth="650"
     Name="Discard"
+    ResizeMode="NoResize"
     Width="1280"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
@@ -56,7 +57,10 @@
                         Gesture="" />
                 </Grid.InputBindings>
 
-                <DockPanel Height="40" Width="Auto">
+                <DockPanel
+                    Height="40"
+                    MinWidth="40"
+                    Width="Auto">
                     <StackPanel Orientation="Horizontal">
 
                         <StackPanel.InputBindings>
@@ -66,7 +70,7 @@
                         <Image
                             Height="40"
                             Margin="0,0,10,0"
-                            Source="file:///C:/Users/Kevin/source/Repos/Discard/Discard/Media/Images/Discard-Logo.png"
+                            Source="media/Images/Discard-Logo.png"
                             Width="40" />
 
                         <TextBlock

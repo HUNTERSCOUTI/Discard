@@ -13,8 +13,8 @@ namespace DiscardSERVER.Class_Models
     public class FriendModel
     {
         public ImageSource ProfilePictureURL { get; set; }
-        public int         FriendID          { get; set; }
-        public string[]?   Messages          { get; set; }
+        public int FriendID { get; set; }
+        public string[]? Messages { get; set; }
 
         public FriendModel(string ProfilePictureURL, int FriendID, string[]? Messages)
         {
