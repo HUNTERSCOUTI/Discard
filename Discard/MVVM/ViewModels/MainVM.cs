@@ -39,7 +39,7 @@ public class MainVM : ViewModelBase
 
     #region ICommands
 
-    public ICommand MoveWindowCommand  { get; set; }
+    public ICommand MoveWindowCommand { get; set; }
     public ICommand CloseWindowCommand { get; set; }
     public ICommand HomeCommand { get; set; }
 
@@ -77,7 +77,7 @@ public class MainVM : ViewModelBase
     private void _tmpUser()
     {
         CurrentUser = new UserModel();
-        CurrentUser.Name = "John Doe";
+        CurrentUser.Name = Environment.UserName;
 
         https: //randomuser.me/api/portraits/men/12.jpg;
         string imageUrl = "https://randomuser.me/api/portraits/";
