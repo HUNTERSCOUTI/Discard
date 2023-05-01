@@ -6,6 +6,7 @@
     MinHeight="700"
     MinWidth="650"
     Name="Discard"
+    ResizeMode="NoResize"
     Width="1280"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
@@ -56,7 +57,10 @@
                         Gesture="" />
                 </Grid.InputBindings>
 
-                <DockPanel Height="40" Width="Auto">
+                <DockPanel
+                    Height="40"
+                    MinWidth="40"
+                    Width="Auto">
                     <StackPanel Orientation="Horizontal">
 
                         <StackPanel.InputBindings>
