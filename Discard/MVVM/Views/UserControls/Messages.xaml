@@ -28,9 +28,16 @@
             </LinearGradientBrush>
         </Border.Background>
 
-        <StackPanel>
+        <Grid DataContext="{Binding Path=SelectedFriend}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="500" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+
             <DockPanel
                 Background="#36393e"
+                Grid.Row="0"
                 VerticalAlignment="Top"
                 Width="1100">
 
@@ -43,14 +50,13 @@
                     Height="55"
                     HorizontalAlignment="Center"
                     Style="{StaticResource AboutText}"
-                    Text="{Binding Path=FriendName}" />
+                    Text="{Binding Path=Name}" />
             </DockPanel>
 
             <!--  Style="{StaticResource AboutText}"  -->
-
             <ListView
-                Background="Transparent"
-                Foreground="Yellow"
+                Background="#282b30"
+                Grid.Row="1"
                 Height="500"
                 HorizontalContentAlignment="Center"
                 ItemsSource="{Binding Path=Messages}"
@@ -70,7 +76,32 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-        </StackPanel>
+            <Border
+                Background="Transparent"
+                CornerRadius="33"
+                Grid.Row="2"
+                Height="40"
+                Width="900">
+                <TextBox
+                    Background="#282b30"
+                    FontSize="22"
+                    Foreground="White"
+                    Text=""
+                    x:Name="MessageBox">
+
+                    <TextBox.InputBindings>
+                        <KeyBinding
+                            Command="{Binding Path=SendMessageCommand}"
+                            CommandParameter="{Binding ElementName=MessageBox}"
+                            Key="Return" />
+                    </TextBox.InputBindings>
+
+                </TextBox>
+
+
+            </Border>
+
+        </Grid>
     </Border>
 
 </UserControl>

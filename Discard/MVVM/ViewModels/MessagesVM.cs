@@ -1,71 +1,67 @@
-﻿using System.Collections.ObjectModel;
+﻿#pragma warning disable
 using System.Windows.Controls;
+using System.Windows.Input;
+using DiscardSERVER.Class_Models;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Client.MVVM.Models;
 using Client.MVVM.Utilities;
 using DiscardSERVER.Class_Models;
 
-#pragma warning disable
 namespace Client.MVVM.ViewModels;
 
 public class MessagesVM : ViewModelBase
 {
     #region Properties
 
-    private string _friendName { get; set; }
-    public string FriendName
+    private FriendModel _selectedFriend { get; set; }
+
+    public FriendModel SelectedFriend
     {
-        get => this._friendName;
+        get => _selectedFriend;
         set
         {
-            this._friendName = value;
+            _selectedFriend = value;
             OnPropertyChanged();
         }
     }
 
-    private ImageSource _profilePicture { get; set; }
-    public ImageSource ProfilePicture
+    private string _userMessage { get; set; }
+
+    public string UserMessage
     {
-        get => this._profilePicture;
+        get => this._userMessage;
         set
         {
-            _profilePicture = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private ObservableCollection<string> _messages { get; set; }
-
-    public ObservableCollection<string> Messages
-    {
-        get => this._messages;
-        set
-        {
-            this._messages = value;
+            this._userMessage = value;
             OnPropertyChanged();
         }
     }
 
     #endregion
 
+    public ICommand SendMessageCommand { get; set; }
+
+    private void SendMessage(object obj)
+    {
+        if (obj is TextBox textBox)
+        {
+            SelectedFriend.Messages.Add(textBox.Text);
+            textBox.Text = string.Empty;
+        }
+    }
+
     #region Constructor
 
-    public MessagesVM(FriendModel friend)
+    public MessagesVM(FriendModel selectedFriend)
     {
-        try
-        {
-            this.FriendName = friend.UserID.ToString();
-            this.ProfilePicture = friend.ProfilePictureURL;
-            this._messages = new ObservableCollection<string>();
+        SendMessageCommand = new RelayCommand(SendMessage);
 
-            foreach (string message in friend.Messages)
-            {
-                Messages.Add(message);
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        SelectedFriend = selectedFriend;
     }
 
     #endregion
