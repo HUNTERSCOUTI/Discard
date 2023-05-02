@@ -14,12 +14,18 @@ namespace Client.Networking
 
         public void Run()
         {
+            //Connect to own PC
+            ConnectToServer(IPAddress.Loopback, PORT);
             //Connect to Zilas
-            ConnectToServer("127.0.0.1", PORT);
-            //ConnectToServer(IPAddress.Parse("172.22.240.1"), PORT);
+            //ConnectToServer(IPAddress.Parse("192.168.1.153"), PORT);
+            while (true)
+            {
+                string send = Console.ReadLine();
+                SendMessage(send);
+            }
         }
 
-        public void ConnectToServer(string ip, int port)
+        public void ConnectToServer(IPAddress ip, int port)
         {
             Connection = new TcpClient();
             Connection.Connect(ip, port);

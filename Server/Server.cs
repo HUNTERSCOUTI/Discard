@@ -28,7 +28,7 @@ namespace Server
                 IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
                 Console.WriteLine("IP: {0}", remoteIpEndPoint.Address);
 
-                NewClient(new UserModel(client, remoteIpEndPoint.ToString())); 
+                NewClient(new UserModel(client, remoteIpEndPoint.Address.ToString()));
             }
         }
 
@@ -37,11 +37,12 @@ namespace Server
             Users.Add(user);
             Thread thread = new(() =>
             {
+                
                 while (true)
                 {
                     try
                     {
-                        string message = Receive(user.UserClient);
+                        string message = Receive(user);
                         Broadcast(message, user);
                     }
                     catch
@@ -54,24 +55,27 @@ namespace Server
                     }
                 }
             });
+            //Closes thread when user disconnects
+            thread.IsBackground = true;
+
             thread.Start();
             Console.WriteLine("New User Connected");
         }
 
         public void DisconnectClient(UserModel user)
         {
-            Console.WriteLine($"{user.Name} has disconnected from the server");
+            Console.WriteLine($"{user.UserIP} has disconnected from the server");
 
             user.UserClient.Close();
         }
 
-        public string Receive(TcpClient client)
+        public string Receive(UserModel user)
         {
-            NetworkStream stream = client.GetStream();
+            NetworkStream stream = user.UserClient.GetStream();
             byte[] buffer = new byte[4096];
             int read = stream.Read(buffer, 0, buffer.Length);
             string recieve = Encoding.UTF8.GetString(buffer, 0, read);
-            Console.WriteLine("User Message Recived");
+            Console.WriteLine($"User Message Recived from {user.UserIP}");
 
             return recieve;
         }
@@ -79,7 +83,7 @@ namespace Server
         public void Broadcast(string message, UserModel sender)
         {
             byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-            byte[] senderNameBytes = Encoding.UTF8.GetBytes(sender.Name);
+            //byte[] senderNameBytes = Encoding.UTF8.GetBytes(sender.Name);
 
             foreach (UserModel user in Users)
             {
@@ -87,7 +91,7 @@ namespace Server
                 {
                     NetworkStream stream = user.UserClient.GetStream();
                     stream.Write(messageBytes);
-                    stream.Write(senderNameBytes);
+                    //stream.Write(senderNameBytes);
                 }
             }
         }
