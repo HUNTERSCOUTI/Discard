@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using Client.MVVM.Utilities;
 using DiscardSERVER.Class_Models;
@@ -9,7 +10,7 @@ namespace Client.MVVM.ViewModels;
 public class FriendsListVM : ViewModelBase
 {
     #region Properties
-    
+
     private ObservableCollection<FriendModel> _friendsList { get; set; }
 
     public ObservableCollection<FriendModel> FriendList
@@ -45,8 +46,14 @@ public class FriendsListVM : ViewModelBase
 
     public FriendsListVM()
     {
-        FriendCommand = new RelayCommand(FriendCLicked);
-
-        _friendsList = new(MainVM.CurrentUser.FriendList);
+        try
+        {
+            FriendCommand = new RelayCommand(FriendCLicked);
+            _friendsList = new(MainVM.CurrentUser.FriendList);
+        }
+        catch (Exception e)
+        {
+            ;
+        }
     }
 }
