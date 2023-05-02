@@ -17,7 +17,7 @@ namespace Server
         public void Start()
         {
             // Open a tcp listener which allows any ip address to connect
-            TcpListener listener = new(IPAddress.Any, PORT);
+            TcpListener listener = new(IPAddress.Loopback, PORT);
             listener.Start();
             Console.WriteLine($"Server: Lytter på port: {PORT}");
             while (true)
