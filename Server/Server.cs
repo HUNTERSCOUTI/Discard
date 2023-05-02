@@ -28,7 +28,7 @@ namespace Server
                 IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
                 Console.WriteLine("IP: {0}", remoteIpEndPoint.Address);
 
-                NewClient(new UserModel(client, remoteIpEndPoint.ToString())); 
+                NewClient(new UserModel(client, remoteIpEndPoint.Address.ToString()));
             }
         }
 
@@ -37,11 +37,12 @@ namespace Server
             Users.Add(user);
             Thread thread = new(() =>
             {
+                
                 while (true)
                 {
                     try
                     {
-                        string message = Receive(user.UserClient);
+                        string message = Receive(user);
                         Broadcast(message, user);
                     }
                     catch
@@ -54,13 +55,16 @@ namespace Server
                     }
                 }
             });
+            //Closes thread when user disconnects
+            thread.IsBackground = true;
+
             thread.Start();
             Console.WriteLine("New User Connected");
         }
 
         public void DisconnectClient(UserModel user)
         {
-            Console.WriteLine($"{user.Name} has disconnected from the server");
+            Console.WriteLine($"{user.UserIP} has disconnected from the server");
 
             user.UserClient.Close();
         }
