@@ -2,6 +2,7 @@
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,22 +14,23 @@ namespace DiscardSERVER.Class_Models
 {
     public class FriendModel : UserModel
     {
-        public ImageSource ProfilePictureURL { get; set; }
-        public string[]? Messages { get; set; }
+        public ObservableCollection<string> Messages { get; set; }
 
-        public FriendModel(string ProfilePictureURL, int FriendID, string[]? Messages)
+        public FriendModel(string ProfilePictureURL)
         {
             this.ProfilePictureURL = new BitmapImage(new Uri(ProfilePictureURL));
-            this.UserID = FriendID;
-            this.Messages = Messages;
+            this.UserID = new Random().Next();
+            this.Messages = new ObservableCollection<string>();
         }
 
         public FriendModel()
         {
-            this.ProfilePictureURL =
+            ProfilePictureURL =
                 new BitmapImage(new Uri(
                     "https://www.flaticon.com/free-icon/profile_3135715?term=user&page=1&position=4&origin=search&related_id=3135715"));
-            this.UserID = new Random().Next();
+            UserID = new Random().Next();
+            this.Messages = new ObservableCollection<string>();
+
         }
     }
 }

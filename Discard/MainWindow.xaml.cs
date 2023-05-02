@@ -19,14 +19,6 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        
-            ClientConnection client = new();
-
-            Thread thread = new(client.Run);
-            thread.Start();
-
-
-        //Fix, does not start WPF program on another thread
         InitializeComponent();
     }
 
