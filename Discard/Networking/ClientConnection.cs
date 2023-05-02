@@ -13,7 +13,10 @@ namespace Client.Networking
 
         public void Run()
         {
-            Connect(IPAddress.Parse("192.168.1.153"), PORT);
+            //Connect to own PC
+            ConnectToServer(IPAddress.Loopback, PORT);
+            //Connect to Zilas
+            //ConnectToServer(IPAddress.Parse("172.22.240.1"), PORT);
             while (true)
             {
                 string send = Console.ReadLine();
@@ -21,21 +24,16 @@ namespace Client.Networking
             }
         }
 
-        public void Connect(IPAddress ip, int port)
+        public void ConnectToServer(IPAddress ip, int port)
         {
-            try
-            {
+            
                 Connection = new TcpClient();
                 Connection.Connect(ip, port);
 
                 Thread thread = new Thread(Listener);
                 thread.Start();
                 Console.WriteLine("Connected To Server");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Could Not Connect to the Server");
-            }
+            
         }
 
         /// <summary>

@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace DiscardSERVER.Class_Models
 {
-    public class FriendModel
+    public class FriendModel : UserModel
     {
-        public int FriendID { get; set; }
         public string[]? Messages { get; set; }
+
+        public FriendModel(int FriendID, string[]? Messages)
+        {
+            this.UserID = FriendID;
+            this.Messages = Messages;
+        }
+
+        public FriendModel()
+        {
+            this.UserID = new Random().Next();
+        }
     }
 }

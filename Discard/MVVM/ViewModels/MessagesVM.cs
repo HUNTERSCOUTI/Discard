@@ -53,7 +53,7 @@ public class MessagesVM : ViewModelBase
     {
         try
         {
-            this.FriendName = friend.FriendID.ToString();
+            this.FriendName = friend.UserID.ToString();
             this.ProfilePicture = friend.ProfilePictureURL;
             this._messages = new ObservableCollection<string>();
 

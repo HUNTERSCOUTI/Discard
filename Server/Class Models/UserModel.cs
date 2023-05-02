@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+using DiscardSERVER.Class_Models;
 
 namespace DiscardSERVER.Class_Models
 {
     public class UserModel
     {
         public TcpClient UserClient { get; set; }
-        public string? UserIP { get; set; }
         public int UserID { get; set; }
         public string Name { get; set; }
         public bool IsOnline { get; set; }
@@ -19,7 +15,13 @@ namespace DiscardSERVER.Class_Models
         public UserModel(TcpClient userClient, string ip)
         {
             UserClient = userClient;
-            UserIP = ip;
+            this.FriendList = new();
+        }
+
+        public UserModel()
+        {
+            this.UserClient = new();
+            this.FriendList = new();
         }
     }
 }

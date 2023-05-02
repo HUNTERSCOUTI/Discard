@@ -96,7 +96,7 @@ public class MainVM : ViewModelBase
         {
             FriendModel friend = new FriendModel();
 
-            friend.FriendID = new Random().Next();
+            friend.UserID = new Random().Next();
 
             https: //randomuser.me/api/portraits/men/12.jpg;
             string imageUrl = "https://randomuser.me/api/portraits/";
@@ -119,7 +119,7 @@ public class MainVM : ViewModelBase
             string[] messages = new string[11];
             for (int j = 0; j < 10; j++)
             {
-                messages[j] = ($"{friend.FriendID} : Message Sample {j * new Random().Next()}");
+                messages[j] = ($"{friend.UserID} : Message Sample {j * new Random().Next()}");
             }
 
             friend.Messages = (messages);
