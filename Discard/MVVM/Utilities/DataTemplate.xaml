@@ -10,5 +10,8 @@
     <DataTemplate DataType="{x:Type vm:WelcomeVM}">
         <pages:WelcomePage />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:GlobalChatVM}">
+        <pages:GlobalChat />
+    </DataTemplate>
 
 </ResourceDictionary>
