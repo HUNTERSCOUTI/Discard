@@ -62,7 +62,11 @@ public class MainVM : ViewModelBase
             window.DragMove();
     }
 
-    private void CloseWindow(Object obj) => Application.Current.Shutdown();
+    private void CloseWindow(Object obj)
+    {
+        Client.DisconnectFromServer();
+        Application.Current.Shutdown();
+    }
 
     #endregion
 

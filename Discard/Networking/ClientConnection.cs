@@ -9,7 +9,7 @@ namespace Client.Networking
 {
     public class ClientConnection
     {
-        TcpClient Connection;
+        public TcpClient Connection;
         const int PORT = 31337;
 
         public void Run()
@@ -20,8 +20,7 @@ namespace Client.Networking
             //ConnectToServer(IPAddress.Parse("192.168.1.153"), PORT);
             while (true)
             {
-                string send = Console.ReadLine();
-                SendMessage(send);
+                //SendMessage(send);
             }
         }
 
@@ -69,6 +68,9 @@ namespace Client.Networking
             }
         }
 
-        //public void Recieve() { }
+        public void DisconnectFromServer()
+        {
+            Connection.Close();
+        }
     }
 }
