@@ -10,8 +10,8 @@ namespace Client.Networking;
 
 public class ClientConnection : ViewModelBase
 {
-    TcpClient Connection;
-    const int PORT = 31337;
+    private TcpClient Connection;
+    private const int PORT = 31337;
 
     private string _message { get; set; }
     public  string Message  { get; set; }
