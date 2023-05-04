@@ -46,7 +46,22 @@ public class MainVM : ViewModelBase
 
     public static UserModel CurrentUser { get; set; }
 
-    #region ICommands
+    private DateTime _dateAndTime { get; set; }
+
+    public DateTime DateAndTime
+    {
+        get => _dateAndTime;
+        set
+        {
+            _dateAndTime = value;
+            DateAndTime = DateTime.Now;
+            OnPropertyChanged();
+        }
+    }
+
+    #endregion
+
+    #region ICommands & Command Functions
 
     public ICommand MoveWindowCommand  { get; set; }
     public ICommand CloseWindowCommand { get; set; }
@@ -74,6 +89,7 @@ public class MainVM : ViewModelBase
 
     public MainVM()
     {
+        _dateAndTime = DateTime.Now;
         try
         {
             _client = new ClientConnection();
@@ -89,7 +105,9 @@ public class MainVM : ViewModelBase
         MoveWindowCommand = new RelayCommand(MoveWindow);
         CloseWindowCommand = new RelayCommand(CloseWindow);
 
-        _currentView = new GlobalChatVM();
+        _tmpData();
+
+        _currentView = new WelcomeVM();
     }
 
     #endregion
