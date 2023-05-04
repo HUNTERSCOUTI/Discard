@@ -18,7 +18,10 @@ namespace Client.MVVM.ViewModels;
 
 public class MainVM : ViewModelBase
 {
+    #region Properties
+
     private static ClientConnection _client { get; set; }
+
     public static ClientConnection Client
     {
         get => _client;
@@ -28,8 +31,6 @@ public class MainVM : ViewModelBase
             OnPropertyChanged("Client");
         }
     }
-
-   
 
     private static Object _currentView { get; set; }
 
@@ -51,7 +52,6 @@ public class MainVM : ViewModelBase
     public ICommand CloseWindowCommand { get; set; }
     public ICommand GlobalChatCommand  { get; set; }
 
-    #endregion
 
     private void GlobalCommand(Object obj) => CurrentView = new GlobalChatVM();
 
