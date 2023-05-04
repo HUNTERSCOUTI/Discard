@@ -48,13 +48,11 @@ public class MainVM : ViewModelBase
 
     public ICommand MoveWindowCommand  { get; set; }
     public ICommand CloseWindowCommand { get; set; }
-    public ICommand HomeCommand        { get; set; }
+    public ICommand GlobalChatCommand  { get; set; }
 
     #endregion
 
-    #region Commands Functions
-
-    private void Home(Object obj) => CurrentView = new WelcomeVM();
+    private void GlobalCommand(Object obj) => CurrentView = new GlobalChatVM();
 
     private void MoveWindow(Object obj)
     {
@@ -81,7 +79,7 @@ public class MainVM : ViewModelBase
             Console.WriteLine(e);
         }
 
-        HomeCommand = new RelayCommand(Home);
+        GlobalChatCommand = new RelayCommand(GlobalCommand);
         MoveWindowCommand = new RelayCommand(MoveWindow);
         CloseWindowCommand = new RelayCommand(CloseWindow);
 
