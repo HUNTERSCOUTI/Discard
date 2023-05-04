@@ -104,5 +104,8 @@ public class ClientConnection : ViewModelBase
         }
     }
 
-//public void Recieve() { }
+    public void Disconnect()
+    {
+        Connection.Close();
+    }
 }
