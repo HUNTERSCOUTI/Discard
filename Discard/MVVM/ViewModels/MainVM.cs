@@ -129,7 +129,7 @@ public class MainVM : ViewModelBase
         CurrentUser.ProfilePictureURL = new BitmapImage(new Uri(portraitsUrl));
 
         //Friends
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 10; i++)
         {
             FriendModel friend = new FriendModel().NewGeneratedFried();
             
@@ -142,7 +142,7 @@ public class MainVM : ViewModelBase
             string[] messages = new string[11];
             for (int j = 0; j < new Random().Next(1, 10); j++)
             {
-                friend.Messages.Add($"{friend.UserID} : Message Sample {j * new Random().Next()}");
+                friend.Messages.Add($"Besked {j * new Random().Next()}");
             }
         }
     }
