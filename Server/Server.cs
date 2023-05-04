@@ -11,22 +11,25 @@ namespace Server
 {
     public class Server
     {
-        const int PORT = 31337;
-        List<UserModel> Users = new();
+        private const int PORT = 31337;
+        private List<UserModel> Users = new();
 
         public void Start()
         {
             // Open a tcp listener which allows any ip address to connect
             TcpListener listener = new(IPAddress.Loopback, PORT);
             listener.Start();
-            Console.WriteLine($"Server: Lytter på port: {PORT}");
+            Console.WriteLine($"Server: Lytter på port: {PORT}", Console.ForegroundColor = ConsoleColor.DarkGreen);
+
             while (true)
             {
                 TcpClient client = listener.AcceptTcpClient();
 
                 //Gets the IP of the accepted client
                 IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
-                Console.WriteLine("IP: {0}", remoteIpEndPoint.Address);
+
+                Console.WriteLine("IP: {0}", remoteIpEndPoint.Address,
+                    Console.ForegroundColor = ConsoleColor.DarkYellow);
 
                 NewClient(new UserModel(client, remoteIpEndPoint.Address.ToString()));
             }
@@ -37,7 +40,6 @@ namespace Server
             Users.Add(user);
             Thread thread = new(() =>
             {
-                
                 while (true)
                 {
                     try
@@ -48,7 +50,10 @@ namespace Server
                     catch
                     {
                         if (!user.UserClient.Connected)
+                        {
                             DisconnectClient(user);
+                            break;
+                        }
                         else
                             Console.WriteLine("Message Error");
                         break;
@@ -64,7 +69,8 @@ namespace Server
 
         public void DisconnectClient(UserModel user)
         {
-            Console.WriteLine($"{user.UserIP} has disconnected from the server");
+            Console.WriteLine($"{user.UserIP} has disconnected from the server",
+                Console.ForegroundColor = ConsoleColor.DarkMagenta);
 
             user.UserClient.Close();
         }
@@ -75,7 +81,8 @@ namespace Server
             byte[] buffer = new byte[4096];
             int read = stream.Read(buffer, 0, buffer.Length);
             string recieve = Encoding.UTF8.GetString(buffer, 0, read);
-            Console.WriteLine($"User Message Recived from {user.UserIP}");
+
+            Console.WriteLine($"User Message Recived from {user.UserIP}", Console.ForegroundColor = ConsoleColor.Cyan);
 
             return recieve;
         }
