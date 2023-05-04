@@ -12,6 +12,7 @@ using System.Windows.Input;
 using Client.MVVM.Models;
 using System.Windows;
 using Client.Networking;
+using RandomFriendlyNameGenerator;
 
 namespace Client.MVVM.ViewModels;
 
@@ -90,52 +91,50 @@ public class MainVM : ViewModelBase
 
     #region tmp
 
-    // private void _tmpData()
-    // {
-    //     CurrentUser = new UserModel();
-    //     CurrentUser.Name = Environment.UserName;
-    //
-    //     string portraitsUrl = "https://randomuser.me/api/portraits/";
-    //
-    //     if (new Random().Next(1, 3) == 1)
-    //         portraitsUrl += $"women/{new Random().Next(1, 99)}.jpg";
-    //     else
-    //         portraitsUrl += $"men/{new Random().Next(1, 99)}.jpg";
-    //
-    //     CurrentUser.ProfilePictureURL = new BitmapImage(new Uri(portraitsUrl));
-    //
-    //     //Friends
-    //     for (int i = 0; i < 20; i++)
-    //     {
-    //         FriendModel friend = new FriendModel();
-    //
-    //         friend.UserID = new Random().Next();
-    //
-    //         https: //randomuser.me/api/portraits/men/12.jpg;
-    //         portraitsUrl = "https://randomuser.me/api/portraits/";
-    //
-    //         if (new Random().Next(1, 3) == 1)
-    //             portraitsUrl += $"women/{new Random().Next(1, 99)}.jpg";
-    //         else
-    //             portraitsUrl += $"men/{new Random().Next(1, 99)}.jpg";
-    //
-    //         friend.ProfilePictureURL = new BitmapImage(new Uri(portraitsUrl));
-    //
-    //         CurrentUser.FriendList.Add(friend);
-    //     }
-    //
-    //     //Messages
-    //     // foreach (FriendModel friend in CurrentUser.FriendList)
-    //     // {
-    //     //     string[] messages = new string[11];
-    //     //     for (int j = 0; j < 10; j++)
-    //     //     {
-    //     //         messages[j] = ($"{friend.UserID} : Message Sample {j * new Random().Next()}");
-    //     //     }
-    //     //
-    //     //     friend.Messages = (messages);
-    //     // }
-    // }
+    private void _tmpData()
+    {
+        CurrentUser = new UserModel();
+        CurrentUser.Name = Environment.UserName;
+
+        string portraitsUrl = "https://randomuser.me/api/portraits/";
+
+        if (new Random().Next(1, 3) == 1)
+            portraitsUrl += $"women/{new Random().Next(1, 99)}.jpg";
+        else
+            portraitsUrl += $"men/{new Random().Next(1, 99)}.jpg";
+
+        CurrentUser.ProfilePictureURL = new BitmapImage(new Uri(portraitsUrl));
+
+        //Friends
+        for (int i = 0; i < 20; i++)
+        {
+            FriendModel friend = new FriendModel();
+
+            friend.UserID = new Random().Next();
+            friend.Name = NameGenerator.PersonNames.Get();
+            https: //randomuser.me/api/portraits/men/12.jpg;
+            portraitsUrl = "https://randomuser.me/api/portraits/";
+
+            if (new Random().Next(1, 3) == 1)
+                portraitsUrl += $"women/{new Random().Next(1, 99)}.jpg";
+            else
+                portraitsUrl += $"men/{new Random().Next(1, 99)}.jpg";
+
+            friend.ProfilePictureURL = new BitmapImage(new Uri(portraitsUrl));
+
+            CurrentUser.FriendList.Add(friend);
+        }
+
+        // Messages
+        foreach (FriendModel friend in CurrentUser.FriendList)
+        {
+            string[] messages = new string[11];
+            for (int j = 0; j < new Random().Next(1, 10); j++)
+            {
+                friend.Messages.Add($"{friend.UserID} : Message Sample {j * new Random().Next()}");
+            }
+        }
+    }
 
     #endregion
 
