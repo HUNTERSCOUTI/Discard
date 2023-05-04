@@ -108,20 +108,8 @@ public class MainVM : ViewModelBase
         //Friends
         for (int i = 0; i < 20; i++)
         {
-            FriendModel friend = new FriendModel();
-
-            friend.UserID = new Random().Next();
-            friend.Name = NameGenerator.PersonNames.Get();
-            https: //randomuser.me/api/portraits/men/12.jpg;
-            portraitsUrl = "https://randomuser.me/api/portraits/";
-
-            if (new Random().Next(1, 3) == 1)
-                portraitsUrl += $"women/{new Random().Next(1, 99)}.jpg";
-            else
-                portraitsUrl += $"men/{new Random().Next(1, 99)}.jpg";
-
-            friend.ProfilePictureURL = new BitmapImage(new Uri(portraitsUrl));
-
+            FriendModel friend = new FriendModel().NewGeneratedFried();
+            
             CurrentUser.FriendList.Add(friend);
         }
 
