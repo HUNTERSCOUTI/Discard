@@ -94,7 +94,7 @@
                         <TextBlock
                             FontSize="26"
                             Foreground="#fdf9f6"
-                            Text="{Binding DateAndTime.GetFullTime, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding DateAndTime}"
                             VerticalAlignment="Center" />
 
 
