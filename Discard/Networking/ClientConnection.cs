@@ -40,7 +40,15 @@ public class ClientConnection : ViewModelBase
     public void ConnectToServer(IPAddress ip, int port)
     {
         Connection = new TcpClient();
-        Connection.Connect(ip, port);
+
+        try
+        {
+            Connection.Connect(ip, port);
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show("Could not connect to server", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
 
         Thread thread = new Thread(Listener);
         thread.Start();
