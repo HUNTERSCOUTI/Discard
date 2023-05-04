@@ -59,23 +59,30 @@ public class ClientConnection : ViewModelBase
     /// </summary>
     public void Listener()
     {
-        byte[] buffer = new byte[4096];
-        NetworkStream stream = Connection.GetStream();
-
         try
         {
-            while (Connection.Connected)
+            if (Connection.Connected)
             {
-                int read = stream.Read(buffer, 0, buffer.Length);
-                string messageFromServer = Encoding.UTF8.GetString(buffer, 0, read);
-                //MAKE displayable on WPF HERE
+                while (Connection.Connected)
+                {
+                    byte[] buffer = new byte[4096];
+                    NetworkStream stream = Connection.GetStream();
+                    int read = stream.Read(buffer, 0, buffer.Length);
+                    string messageFromServer = Encoding.UTF8.GetString(buffer, 0, read);
+                    //MAKE displayable on WPF HERE
 
-                GlobalChatVM.MessageHistory.Add(messageFromServer);
+                    GlobalChatVM.MessageHistory.Add(messageFromServer);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Connection to server lost");
+                Disconnect();
             }
         }
         catch (Exception e)
         {
-            MessageBox.Show("Connection to the server has been lost", "Error");
+            MessageBox.Show("Something went wrong in Listener");
         }
     }
 
