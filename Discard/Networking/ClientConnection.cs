@@ -13,6 +13,7 @@ public class ClientConnection : ViewModelBase
     private TcpClient Connection;
     private const int PORT = 31337;
 
+    private bool newMessage = false;
     private string _message { get; set; }
     public  string Message  { get; set; }
 
@@ -24,7 +25,7 @@ public class ClientConnection : ViewModelBase
         //ConnectToServer(IPAddress.Parse("192.168.1.153"), PORT);
         while (true)
         {
-            if (_message != Message)
+            if (newMessage == true)
             {
                 SendMessage(Message);
                 Thread.Sleep(3000);
@@ -72,11 +73,19 @@ public class ClientConnection : ViewModelBase
 
     public void SendMessage(string message)
     {
-        if (Connection.Connected)
+        try
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(message);
-            NetworkStream stream = Connection.GetStream();
-            stream.Write(bytes, 0, bytes.Length);
+            if (Connection.Connected)
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(message);
+                NetworkStream stream = Connection.GetStream();
+                stream.Write(bytes, 0, bytes.Length);
+                newMessage = false;
+            }
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show("Someting went wrong", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
