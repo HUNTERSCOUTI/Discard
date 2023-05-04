@@ -1,7 +1,7 @@
-﻿using System.Net;
+﻿#pragma warning disable
+using System.Net;
 using System.Net.Sockets;
 using DiscardSERVER.Class_Models;
-
 namespace DiscardSERVER.Class_Models
 {
     public class UserModel
