@@ -6,6 +6,7 @@ namespace Server
     {
         public static void Main()
         {
+            Console.Clear();
             Server server = new();
 
             server.Start();

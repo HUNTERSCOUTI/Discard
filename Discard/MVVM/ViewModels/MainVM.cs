@@ -12,12 +12,16 @@ using System.Windows.Input;
 using Client.MVVM.Models;
 using System.Windows;
 using Client.Networking;
+using RandomFriendlyNameGenerator;
 
 namespace Client.MVVM.ViewModels;
 
 public class MainVM : ViewModelBase
 {
+    #region Properties
+
     private static ClientConnection _client { get; set; }
+
     public static ClientConnection Client
     {
         get => _client;
@@ -44,17 +48,29 @@ public class MainVM : ViewModelBase
 
     public static UserModel CurrentUser { get; set; }
 
-    #region ICommands
+    private DateTime _dateAndTime { get; set; }
 
-    public ICommand MoveWindowCommand  { get; set; }
-    public ICommand CloseWindowCommand { get; set; }
-    public ICommand HomeCommand        { get; set; }
+    public DateTime DateAndTime
+    {
+        get => _dateAndTime;
+        set
+        {
+            _dateAndTime = value;
+            DateAndTime = DateTime.Now;
+            OnPropertyChanged();
+        }
+    }
 
     #endregion
 
-    #region Commands Functions
+    #region ICommands & Command Functions
 
-    private void Home(Object obj) => CurrentView = new WelcomeVM();
+    public ICommand MoveWindowCommand  { get; set; }
+    public ICommand CloseWindowCommand { get; set; }
+    public ICommand GlobalChatCommand  { get; set; }
+
+
+    private void Global(Object obj) => CurrentView = new GlobalChatVM();
 
     private void MoveWindow(Object obj)
     {
@@ -73,7 +89,8 @@ public class MainVM : ViewModelBase
     #region Constructor
 
     public MainVM()
-    {
+    { 
+        _dateAndTime = DateTime.Now;
         try
         {
             _client = new ClientConnection();
@@ -85,63 +102,51 @@ public class MainVM : ViewModelBase
             Console.WriteLine(e);
         }
 
-        HomeCommand = new RelayCommand(Home);
+        GlobalChatCommand = new RelayCommand(Global);
         MoveWindowCommand = new RelayCommand(MoveWindow);
         CloseWindowCommand = new RelayCommand(CloseWindow);
 
-        _currentView = new GlobalChatVM();
+        _tmpData();
+
+        _currentView = new WelcomeVM();
     }
 
     #endregion
 
     #region tmp
 
-    // private void _tmpData()
-    // {
-    //     CurrentUser = new UserModel();
-    //     CurrentUser.Name = Environment.UserName;
-    //
-    //     string portraitsUrl = "https://randomuser.me/api/portraits/";
-    //
-    //     if (new Random().Next(1, 3) == 1)
-    //         portraitsUrl += $"women/{new Random().Next(1, 99)}.jpg";
-    //     else
-    //         portraitsUrl += $"men/{new Random().Next(1, 99)}.jpg";
-    //
-    //     CurrentUser.ProfilePictureURL = new BitmapImage(new Uri(portraitsUrl));
-    //
-    //     //Friends
-    //     for (int i = 0; i < 20; i++)
-    //     {
-    //         FriendModel friend = new FriendModel();
-    //
-    //         friend.UserID = new Random().Next();
-    //
-    //         https: //randomuser.me/api/portraits/men/12.jpg;
-    //         portraitsUrl = "https://randomuser.me/api/portraits/";
-    //
-    //         if (new Random().Next(1, 3) == 1)
-    //             portraitsUrl += $"women/{new Random().Next(1, 99)}.jpg";
-    //         else
-    //             portraitsUrl += $"men/{new Random().Next(1, 99)}.jpg";
-    //
-    //         friend.ProfilePictureURL = new BitmapImage(new Uri(portraitsUrl));
-    //
-    //         CurrentUser.FriendList.Add(friend);
-    //     }
-    //
-    //     //Messages
-    //     // foreach (FriendModel friend in CurrentUser.FriendList)
-    //     // {
-    //     //     string[] messages = new string[11];
-    //     //     for (int j = 0; j < 10; j++)
-    //     //     {
-    //     //         messages[j] = ($"{friend.UserID} : Message Sample {j * new Random().Next()}");
-    //     //     }
-    //     //
-    //     //     friend.Messages = (messages);
-    //     // }
-    // }
+    private void _tmpData()
+    {
+        CurrentUser = new UserModel();
+        CurrentUser.Name = Environment.UserName;
+
+        string portraitsUrl = "https://randomuser.me/api/portraits/";
+
+        if (new Random().Next(1, 3) == 1)
+            portraitsUrl += $"women/{new Random().Next(1, 99)}.jpg";
+        else
+            portraitsUrl += $"men/{new Random().Next(1, 99)}.jpg";
+
+        CurrentUser.ProfilePictureURL = new BitmapImage(new Uri(portraitsUrl));
+
+        //Friends
+        for (int i = 0; i < 10; i++)
+        {
+            FriendModel friend = new FriendModel().NewGeneratedFried();
+            
+            CurrentUser.FriendList.Add(friend);
+        }
+
+        // Messages
+        foreach (FriendModel friend in CurrentUser.FriendList)
+        {
+            string[] messages = new string[11];
+            for (int j = 0; j < new Random().Next(1, 10); j++)
+            {
+                friend.Messages.Add($"Besked {j * new Random().Next()}");
+            }
+        }
+    }
 
     #endregion
 

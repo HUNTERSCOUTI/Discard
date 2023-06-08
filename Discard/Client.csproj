@@ -10,11 +10,20 @@
 
   <ItemGroup>
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
+    <PackageReference Include="RandomFriendlyNameGenerator" Version="1.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Media\Images\Discard-Logo.png" />
     <Resource Include="Media\Images\Discard-Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="MVVM\Views\Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>
