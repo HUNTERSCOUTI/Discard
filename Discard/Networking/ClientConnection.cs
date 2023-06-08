@@ -77,6 +77,7 @@ namespace Client.Networking
 
         public void DisconnectFromServer()
         {
+            Connection.Dispose();
             Connection.Close();
         }
     }

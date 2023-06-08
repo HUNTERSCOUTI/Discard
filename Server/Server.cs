@@ -37,13 +37,13 @@ namespace Server
             Users.Add(user);
             Thread thread = new(() =>
             {
-                
                 while (true)
                 {
                     try
                     {
                         string message = Receive(user);
-                        Broadcast(message, user);
+                        if(message != "")
+                            Broadcast(message, user);
                     }
                     catch
                     {
@@ -95,6 +95,7 @@ namespace Server
                 {
                     NetworkStream stream = user.UserClient.GetStream();
                     stream.Write(messageBytes);
+                    Console.WriteLine($"User Message Broadcasted from {user.UserIP}");
                     //stream.Write(senderNameBytes);
                 }
             }

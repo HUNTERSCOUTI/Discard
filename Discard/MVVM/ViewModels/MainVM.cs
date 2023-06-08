@@ -82,6 +82,8 @@ public class MainVM : ViewModelBase
     {
         Client.DisconnectFromServer();
         Application.Current.Shutdown();
+        Application.Current.Dispatcher.InvokeShutdown();
+        Environment.Exit(0);
     }
 
     #endregion
