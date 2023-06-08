@@ -26,11 +26,18 @@ namespace Client.Networking
 
         public void ConnectToServer(IPAddress ip, int port)
         {
-            Connection = new TcpClient();
-            Connection.Connect(ip, port);
+            try
+            {
+                Connection = new TcpClient();
+                Connection.Connect(ip, port);
 
-            Thread thread = new Thread(Listener);
-            thread.Start();
+                Thread thread = new Thread(Listener);
+                thread.Start();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Could not connect to the server, IP ...", "Error");
+            }
         }
 
         /// <summary>
