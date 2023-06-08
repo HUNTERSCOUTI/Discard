@@ -70,7 +70,7 @@ public class MainVM : ViewModelBase
     public ICommand GlobalChatCommand  { get; set; }
 
 
-    private void GlobalCommand(Object obj) => CurrentView = new GlobalChatVM();
+    private void Global(Object obj) => CurrentView = new GlobalChatVM();
 
     private void MoveWindow(Object obj)
     {
@@ -102,7 +102,7 @@ public class MainVM : ViewModelBase
             Console.WriteLine(e);
         }
 
-        HomeCommand = new RelayCommand(Home);
+        GlobalChatCommand = new RelayCommand(Global);
         MoveWindowCommand = new RelayCommand(MoveWindow);
         CloseWindowCommand = new RelayCommand(CloseWindow);
 
