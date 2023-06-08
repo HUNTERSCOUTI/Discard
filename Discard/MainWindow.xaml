@@ -70,7 +70,7 @@
                         <Image
                             Height="40"
                             Margin="0,0,10,0"
-                            Source="media/Images/Discard-Logo.png"
+                            Source="Media/Images/Discard-Logo.png"
                             Width="40" />
 
                         <TextBlock

@@ -71,13 +71,17 @@ namespace Server
 
         public string Receive(UserModel user)
         {
-            NetworkStream stream = user.UserClient.GetStream();
-            byte[] buffer = new byte[4096];
-            int read = stream.Read(buffer, 0, buffer.Length);
-            string recieve = Encoding.UTF8.GetString(buffer, 0, read);
-            Console.WriteLine($"User Message Recived from {user.UserIP}");
+            if (user.UserClient.Connected)
+            {
+                NetworkStream stream = user.UserClient.GetStream();
+                byte[] buffer = new byte[4096];
+                int read = stream.Read(buffer, 0, buffer.Length);
+                string recieve = Encoding.UTF8.GetString(buffer, 0, read);
+                Console.WriteLine($"User Message Recived from {user.UserIP}");
 
-            return recieve;
+                return recieve;
+            }
+            return "Empty Recieve";
         }
 
         public void Broadcast(string message, UserModel sender)
