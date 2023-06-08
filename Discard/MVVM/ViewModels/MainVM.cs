@@ -32,6 +32,8 @@ public class MainVM : ViewModelBase
         }
     }
 
+   
+
     private static Object _currentView { get; set; }
 
     public static Object CurrentView
@@ -78,9 +80,8 @@ public class MainVM : ViewModelBase
 
     private void CloseWindow(Object obj)
     {
+        Client.DisconnectFromServer();
         Application.Current.Shutdown();
-
-        Client.Disconnect();
     }
 
     #endregion
@@ -88,7 +89,7 @@ public class MainVM : ViewModelBase
     #region Constructor
 
     public MainVM()
-    {
+    { 
         _dateAndTime = DateTime.Now;
         try
         {
@@ -101,7 +102,7 @@ public class MainVM : ViewModelBase
             Console.WriteLine(e);
         }
 
-        GlobalChatCommand = new RelayCommand(GlobalCommand);
+        HomeCommand = new RelayCommand(Home);
         MoveWindowCommand = new RelayCommand(MoveWindow);
         CloseWindowCommand = new RelayCommand(CloseWindow);
 

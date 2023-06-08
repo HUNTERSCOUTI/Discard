@@ -34,7 +34,7 @@ public class FriendsListVM : ViewModelBase
 
     #region
 
-    private void FriendCLicked(Object obj)
+    private void FriendClicked(Object obj)
     {
         if (obj is FriendModel friend)
             MainVM.CurrentView = new MessagesVM(friend);
@@ -48,8 +48,8 @@ public class FriendsListVM : ViewModelBase
     {
         try
         {
-            FriendCommand = new RelayCommand(FriendCLicked);
-            _friendsList = new(MainVM.CurrentUser.FriendList);
+            FriendCommand = new RelayCommand(FriendClicked);
+            //_friendsList = new(MainVM.CurrentUser.FriendList);
         }
         catch (Exception e)
         {
