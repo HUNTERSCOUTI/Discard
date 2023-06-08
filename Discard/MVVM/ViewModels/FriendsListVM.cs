@@ -49,7 +49,7 @@ public class FriendsListVM : ViewModelBase
         try
         {
             FriendCommand = new RelayCommand(FriendClicked);
-            //_friendsList = new(MainVM.CurrentUser.FriendList);
+            _friendsList = new(MainVM.CurrentUser.FriendList);
         }
         catch (Exception e)
         {
