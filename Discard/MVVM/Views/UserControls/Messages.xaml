@@ -46,11 +46,12 @@
                     Source="{Binding Path=ProfilePicture}"
                     Width="60" />
                 <TextBlock
-                    FontSize="40"
+                    FontSize="35"
                     Height="55"
                     HorizontalAlignment="Center"
                     Style="{StaticResource AboutText}"
-                    Text="{Binding Path=Name}" />
+                    Text="{Binding Path=Name}"
+                    VerticalAlignment="Top" />
             </DockPanel>
 
             <!--  Style="{StaticResource AboutText}"  -->
