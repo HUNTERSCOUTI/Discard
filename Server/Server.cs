@@ -43,21 +43,25 @@ namespace Server
             {
                 while (true)
                 {
-                    try
+                    if (user.UserClient.Client.Connected)
                     {
-                        string message = Receive(user);
-                        Broadcast(message, user);
-                    }
-                    catch
-                    {
-                        if (!user.UserClient.Connected)
+                        try
                         {
-                            DisconnectClient(user);
+                            string message = Receive(user);
+                            Broadcast(message, user);
+                        }
+                        catch
+                        {
+                            if (!user.UserClient.Connected)
+                            {
+                                DisconnectClient(user);
+                                break;
+                            }
+                            else
+                                Console.WriteLine("Message Error");
+
                             break;
                         }
-                        else
-                            Console.WriteLine("Message Error");
-                        break;
                     }
                 }
             });

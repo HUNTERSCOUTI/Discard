@@ -84,6 +84,10 @@ public class ClientConnection : ViewModelBase
         {
             MessageBox.Show("Something went wrong in Listener");
         }
+        finally
+        {
+            Connection.Close();
+        }
     }
 
     public void SendMessage(string message)
