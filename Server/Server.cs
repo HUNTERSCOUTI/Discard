@@ -28,7 +28,7 @@ namespace Server
                 IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
                 Console.WriteLine("IP: {0}", remoteIpEndPoint.Address);
 
-                NewClient(new UserModel(client, remoteIpEndPoint.Address.ToString()));
+                NewClient(new UserModel(client, remoteIpEndPoint.Address.ToString() ));
             }
         }
 
@@ -42,8 +42,7 @@ namespace Server
                     try
                     {
                         string message = Receive(user);
-                        if(message != "")
-                            Broadcast(message, user);
+                        Broadcast(message, user);
                     }
                     catch
                     {

@@ -9,6 +9,8 @@ namespace Client.Networking
 {
     public class ClientConnection
     {
+        private LingerOption _LingerOption = new(true, 10);
+
         public TcpClient Connection;
         const int PORT = 31337;
 
@@ -16,8 +18,6 @@ namespace Client.Networking
         {
             //Connect to own PC
             ConnectToServer(IPAddress.Loopback, PORT);
-            //Connect to Zilas
-            //ConnectToServer(IPAddress.Parse("192.168.1.153"), PORT);
             while (true)
             {
                 //SendMessage(send);
@@ -29,10 +29,14 @@ namespace Client.Networking
             try
             {
                 Connection = new TcpClient();
+                Connection.LingerState = _LingerOption;
                 Connection.Connect(ip, port);
 
                 Thread thread = new Thread(Listener);
                 thread.Start();
+                byte[] bytes = Encoding.UTF8.GetBytes(Environment.UserName);
+                NetworkStream stream = Connection.GetStream();
+                stream.Write(bytes, 0, bytes.Length);
             }
             catch (Exception e)
             {
@@ -77,7 +81,7 @@ namespace Client.Networking
 
         public void DisconnectFromServer()
         {
-            Connection.Dispose();
+            Connection.GetStream().Close();
             Connection.Close();
         }
     }
