@@ -70,12 +70,13 @@ namespace Server
 
         public string Receive(UserModel user)
         {
-            if (user.UserClient.Connected)
+            while (user.UserClient.Connected)
             {
                 NetworkStream stream = user.UserClient.GetStream();
                 byte[] buffer = new byte[4096];
                 int read = stream.Read(buffer, 0, buffer.Length);
-                string recieve = Encoding.UTF8.GetString(buffer, 0, read);
+                if (read == 0) break ;
+                    string recieve = Encoding.UTF8.GetString(buffer, 0, read);
                 Console.WriteLine($"User Message Recived from {user.UserIP}");
 
                 return recieve;

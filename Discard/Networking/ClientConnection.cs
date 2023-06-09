@@ -9,7 +9,9 @@ namespace Client.Networking
 {
     public class ClientConnection
     {
-        private LingerOption _LingerOption = new(true, 10);
+        Thread thread = null;
+
+        private LingerOption _LingerOption = new(true, 2);
 
         public TcpClient Connection;
         const int PORT = 31337;
@@ -32,7 +34,7 @@ namespace Client.Networking
                 Connection.LingerState = _LingerOption;
                 Connection.Connect(ip, port);
 
-                Thread thread = new Thread(Listener);
+                thread = new Thread(Listener);
                 thread.Start();
                 byte[] bytes = Encoding.UTF8.GetBytes(Environment.UserName);
                 NetworkStream stream = Connection.GetStream();
@@ -50,18 +52,20 @@ namespace Client.Networking
         public void Listener()
         {
             byte[] buffer = new byte[4096];
-            NetworkStream stream = Connection.GetStream();
+            NetworkStream connectionStream = Connection.GetStream();
 
             try
             {
                 while (Connection.Connected)
                 {
-                    int read = stream.Read(buffer, 0, buffer.Length);
-                    string messageFromServer = Encoding.UTF8.GetString(buffer, 0, read);
+                    int read = connectionStream.Read(buffer, 0, buffer.Length);
+                    if (read == 0) break;
+                        string messageFromServer = Encoding.UTF8.GetString(buffer, 0, read);
                     //MAKE displayable on WPF HERE
 
                     GlobalChatVM.MessageHistory.Add(messageFromServer);
                 }
+                connectionStream.Close();
             }
             catch (Exception e)
             {

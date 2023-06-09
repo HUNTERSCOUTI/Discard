@@ -81,8 +81,7 @@ public class MainVM : ViewModelBase
     private void CloseWindow(Object obj)
     {
         Client.DisconnectFromServer();
-        Application.Current.Shutdown();
-        Application.Current.Dispatcher.InvokeShutdown();
+
         Environment.Exit(0);
     }
 
