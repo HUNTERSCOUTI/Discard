@@ -6,29 +6,31 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using static DiscardSERVER.Class_Models.PrintWithColorModel;
 
 namespace Server
 {
     public class Server
     {
-        const int PORT = 31337;
+        private const int Port = 31337;
         List<UserModel> Users = new();
 
         public void Start()
         {
             // Open a tcp listener which allows any ip address to connect
-            TcpListener listener = new(IPAddress.Loopback, PORT);
+            TcpListener listener = new(IPAddress.Loopback, Port);
             listener.Start();
-            Console.WriteLine($"Server: Lytter på port: {PORT}");
+            PrintWithColor($"Server: Lytter på port: {Port}", ConsoleColor.Green);
+            
             while (true)
             {
                 TcpClient client = listener.AcceptTcpClient();
 
                 //Gets the IP of the accepted client
                 IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
-                Console.WriteLine("IP: {0}", remoteIpEndPoint.Address);
+                PrintWithColor($"IP: {remoteIpEndPoint.Address}", ConsoleColor.DarkYellow);
 
-                NewClient(new UserModel(client, remoteIpEndPoint.Address.ToString() ));
+                NewClient(new UserModel(client, remoteIpEndPoint.Address.ToString()));
             }
         }
 
@@ -49,7 +51,7 @@ namespace Server
                         if (!user.UserClient.Connected)
                             DisconnectClient(user);
                         else
-                            Console.WriteLine("Message Error");
+                            PrintWithColor("Message Error", ConsoleColor.Red);
                         break;
                     }
                 }
@@ -58,12 +60,12 @@ namespace Server
             thread.IsBackground = true;
 
             thread.Start();
-            Console.WriteLine("New User Connected");
+            PrintWithColor("New User Connected", ConsoleColor.DarkGreen);
         }
 
         public void DisconnectClient(UserModel user)
         {
-            Console.WriteLine($"{user.UserIP} has disconnected from the server");
+            PrintWithColor($"{user.UserIP} has disconnected from the server", ConsoleColor.DarkRed);
 
             user.UserClient.Close();
         }
@@ -75,13 +77,14 @@ namespace Server
                 NetworkStream stream = user.UserClient.GetStream();
                 byte[] buffer = new byte[4096];
                 int read = stream.Read(buffer, 0, buffer.Length);
-                if (read == 0) break ;
-                    string recieve = Encoding.UTF8.GetString(buffer, 0, read);
-                Console.WriteLine($"User Message Recived from {user.UserIP}");
+                if (read == 0) break;
+                string recieve = Encoding.UTF8.GetString(buffer, 0, read);
+                PrintWithColor($"User Message Received from {user.UserIP}", ConsoleColor.DarkGray);
 
                 return recieve;
             }
-            return "Empty Recieve";
+
+            return "Empty Message Received";
         }
 
         public void Broadcast(string message, UserModel sender)
@@ -95,7 +98,7 @@ namespace Server
                 {
                     NetworkStream stream = user.UserClient.GetStream();
                     stream.Write(messageBytes);
-                    Console.WriteLine($"User Message Broadcasted from {user.UserIP}");
+                    PrintWithColor($"User Message Broadcasted from {user.UserIP}", ConsoleColor.Cyan);
                     //stream.Write(senderNameBytes);
                 }
             }
