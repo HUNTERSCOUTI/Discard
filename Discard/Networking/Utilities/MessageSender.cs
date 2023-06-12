@@ -2,7 +2,7 @@
 using System.Text;
 using System.Windows;
 
-namespace Client.Networking.Models;
+namespace Client.Networking.Utilities;
 
 public static class MessageSender
 {

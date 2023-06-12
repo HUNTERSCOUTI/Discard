@@ -4,8 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Windows;
 using Client.MVVM.ViewModels;
-using static Client.Networking.Models.MessageSender;
-using Client.Networking.Models;
+using static Client.Networking.Utilities.MessageSender;
 
 namespace Client.Networking
 {
