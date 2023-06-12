@@ -4,6 +4,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Windows;
 using Client.MVVM.ViewModels;
+using static Client.Networking.Models.MessageSender;
+using Client.Networking.Models;
 
 namespace Client.Networking
 {
@@ -20,12 +22,13 @@ namespace Client.Networking
         {
             //Connect to own PC
             ConnectToServer(IPAddress.Loopback, PORT);
-            
-            while (true)
-            {
-                SendMessage();
-            }
         }
+        
+        public void SendMessage(string message)
+        {
+            SendMessageToServer(message, Connection);
+        }
+
 
         public void ConnectToServer(IPAddress ip, int port)
         {
@@ -75,22 +78,6 @@ namespace Client.Networking
             }
         }
 
-        public void SendMessage(string message)
-        {
-            try
-            {
-                if (Connection.Connected)
-                {
-                    byte[] bytes = Encoding.UTF8.GetBytes(message);
-                    NetworkStream stream = Connection.GetStream();
-                    stream.Write(bytes, 0, bytes.Length);
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Could not send message to the server", "Error");
-            }
-        }
 
         public void DisconnectFromServer()
         {
@@ -101,8 +88,6 @@ namespace Client.Networking
 
                 if (thread.ThreadState == ThreadState.Running)
                 {
-                    
-
                     // thread.ThreadState = ThreadState.AbortRequested;
                 }
             }
