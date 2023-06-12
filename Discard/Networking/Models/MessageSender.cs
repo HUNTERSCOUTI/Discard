@@ -6,7 +6,7 @@ namespace Client.Networking.Models;
 
 public static class MessageSender
 {
-    public static void SendMessage(string message, TcpClient Connection)
+    public static void SendMessageToServer(string message, TcpClient Connection)
     {
         try
         {
