@@ -20,9 +20,10 @@ namespace Client.Networking
         {
             //Connect to own PC
             ConnectToServer(IPAddress.Loopback, PORT);
+            
             while (true)
             {
-                //SendMessage(send);
+                SendMessage();
             }
         }
 
@@ -60,11 +61,12 @@ namespace Client.Networking
                 {
                     int read = connectionStream.Read(buffer, 0, buffer.Length);
                     if (read == 0) break;
-                        string messageFromServer = Encoding.UTF8.GetString(buffer, 0, read);
+                    string messageFromServer = Encoding.UTF8.GetString(buffer, 0, read);
                     //MAKE displayable on WPF HERE
 
                     GlobalChatVM.MessageHistory.Add(messageFromServer);
                 }
+
                 connectionStream.Close();
             }
             catch (Exception e)
@@ -75,18 +77,35 @@ namespace Client.Networking
 
         public void SendMessage(string message)
         {
-            if (Connection.Connected)
+            try
             {
-                byte[] bytes = Encoding.UTF8.GetBytes(message);
-                NetworkStream stream = Connection.GetStream();
-                stream.Write(bytes, 0, bytes.Length);
+                if (Connection.Connected)
+                {
+                    byte[] bytes = Encoding.UTF8.GetBytes(message);
+                    NetworkStream stream = Connection.GetStream();
+                    stream.Write(bytes, 0, bytes.Length);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Could not send message to the server", "Error");
             }
         }
 
         public void DisconnectFromServer()
         {
-            Connection.GetStream().Close();
-            Connection.Close();
+            // Disconnect from server
+            if (Connection.Connected)
+            {
+                Connection.Close();
+
+                if (thread.ThreadState == ThreadState.Running)
+                {
+                    
+
+                    // thread.ThreadState = ThreadState.AbortRequested;
+                }
+            }
         }
     }
 }
