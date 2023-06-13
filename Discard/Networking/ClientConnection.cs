@@ -12,8 +12,6 @@ namespace Client.Networking
 {
     public class ClientConnection
     {
-        private LingerOption _LingerOption = new(true, 2);
-
         public TcpClient? Connection;
         const int PORT = 31337;
 
