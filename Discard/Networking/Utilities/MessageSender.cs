@@ -6,11 +6,11 @@ namespace Client.Networking.Utilities;
 
 public static class MessageSender
 {
-    public static void SendMessageToServer(string message, TcpClient Connection)
+    public static void SendMessageToServer(string message, TcpClient? Connection)
     {
         try
         {
-            if (Connection.Connected)
+            if (Connection != null && Connection.Connected)
             {
                 byte[] bytes = Encoding.UTF8.GetBytes(message);
                 NetworkStream stream = Connection.GetStream();
