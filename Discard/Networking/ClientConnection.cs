@@ -17,10 +17,18 @@ namespace Client.Networking
         public TcpClient? Connection;
         const int PORT = 31337;
 
+        void CreateConnection()
+        {
+            Connection = new TcpClient();
+            Connection.LingerState = new(true, 2);
+            Connection.Connect(IPAddress.Loopback, PORT);
+        }
+
         public void Run()
         {
-            //Connect to own PC
-            ConnectToServer(IPAddress.Loopback, PORT, Connection, _LingerOption);
+            //Creates Connection then Connects to server
+            CreateConnection();
+            ConnectToServer(Connection);
         }
 
         public void SendMessage(string message)
