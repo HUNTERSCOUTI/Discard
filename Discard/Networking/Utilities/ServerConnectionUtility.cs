@@ -10,16 +10,16 @@ namespace Client.Networking.Utilities;
 public static class ServerConnectionUtility
 {
     private static TcpClient _connection;
-    private static Thread thread;
-    private static bool isRunning = true;
+    private static Thread _thread;
+    private static bool _isRunning = true;
 
     public static void ConnectToServer(TcpClient Connection)
     {
         _connection = Connection;
         try
         {
-            thread = new Thread(Listener);
-            thread.Start();
+            _thread = new Thread(Listener);
+            _thread.Start();
 
             byte[] bytes = Encoding.UTF8.GetBytes(Environment.UserName);
             NetworkStream stream = _connection.GetStream();
@@ -39,7 +39,7 @@ public static class ServerConnectionUtility
             byte[] buffer = new byte[4096];
             NetworkStream connectionStream = _connection.GetStream();
             
-            while (_connection.Connected && isRunning)
+            while (_connection.Connected && _isRunning)
             {
                 int read = connectionStream.Read(buffer, 0, buffer.Length);
                 if (read == 0) break;
@@ -57,8 +57,8 @@ public static class ServerConnectionUtility
 
     public static void StopListening()
     {
-        isRunning = false;
-        thread.Join(); // Wait for the thread to finish before continuing
+        _isRunning = false;
+        _thread.Join(); // Wait for the thread to finish before continuing
     }
     
     public static void Disconnect(TcpClient Connection)
@@ -66,7 +66,7 @@ public static class ServerConnectionUtility
         // Disconnect from server
         if (Connection.Connected)
         {
-            if (thread.ThreadState == ThreadState.Running)
+            if (_thread.ThreadState == ThreadState.Running)
                 StopListening();
 
             Connection.Close();
