@@ -31,18 +31,16 @@ public static class ServerConnectionUtility
 
     private static void Listener()
     {
-
         try
         {
             byte[] buffer = new byte[4096];
             NetworkStream connectionStream = _connection.GetStream();
-            
+
             while (_connection.Connected && _isRunning)
             {
                 int read = connectionStream.Read(buffer, 0, buffer.Length);
                 if (read == 0) break;
                 string messageFromServer = Encoding.UTF8.GetString(buffer, 0, read);
-              
             }
 
             connectionStream.Close();
@@ -58,16 +56,17 @@ public static class ServerConnectionUtility
         _isRunning = false;
         _thread.Join(); // Wait for the thread to finish before continuing
     }
-    
+
     public static void Disconnect(TcpClient Connection)
     {
-        // Disconnect from server
-        if (Connection.Connected)
-        {
+        //Stops the Running Thread
+        if (_thread is not null)
             if (_thread.ThreadState == ThreadState.Running)
                 StopListening();
 
-            Connection.Close();
-        }
+        // Disconnect from server
+        if (Connection is not null)
+            if (Connection.Connected)
+                Connection.Close();
     }
 }
