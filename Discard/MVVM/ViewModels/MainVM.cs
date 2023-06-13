@@ -75,19 +75,8 @@ public class MainVM : ViewModelBase
     {
         Client.DisconnectFromServer();
 
-        Process[] myProcesses;
-        myProcesses = Process.GetProcessesByName("Discard");
-        foreach (Process myProcess in myProcesses)
-        {
-            if (myProcess.MainWindowHandle == IntPtr.Zero)
-            {
-                myProcess.Kill();
-            }
-            else
-            {
-                myProcess.CloseMainWindow();
-            }
-        }
+        Process.GetCurrentProcess().Kill();
+
     }
 
     #endregion
