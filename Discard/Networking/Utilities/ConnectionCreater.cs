@@ -20,7 +20,7 @@ public class ConnectionCreater
         }
         catch (SocketException ex)
         {
-            Console.WriteLine("Error creating connection: " + ex.Message);
+            Console.WriteLine($"😒Error creating connection😒: \n{ex.Message}");
             // Handle the error gracefully
             return null;
         }
