@@ -1,12 +1,9 @@
 ﻿#pragma warning disable
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Windows;
-using Client.MVVM.ViewModels;
-using Client.Networking.Utilities;
 using static Client.Networking.Utilities.MessageSender;
 using static Client.Networking.Utilities.ServerConnectionUtility;
+using static Client.Networking.Utilities.ConnectionCreater;
 
 namespace Client.Networking
 {
@@ -31,12 +28,12 @@ namespace Client.Networking
 
         public void SendMessage(string message)
         {
-            SendMessageToServer(message, Connection);
+            SendMessageToServer(message, _connection);
         }
 
         public void DisconnectFromServer()
         {
-            Disconnect(Connection);
+            Disconnect(_connection);
         }
     }
 }
