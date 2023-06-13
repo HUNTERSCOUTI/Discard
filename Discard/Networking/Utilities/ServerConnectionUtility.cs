@@ -36,12 +36,13 @@ public static class ServerConnectionUtility
 
     private static void Listener()
     {
-        byte[] buffer = new byte[4096];
-        NetworkStream connectionStream = _connection.GetStream();
 
         try
         {
-            while (_connection.Connected)
+            byte[] buffer = new byte[4096];
+            NetworkStream connectionStream = _connection.GetStream();
+            
+            while (_connection.Connected && isRunning)
             {
                 int read = connectionStream.Read(buffer, 0, buffer.Length);
                 if (read == 0) break;
