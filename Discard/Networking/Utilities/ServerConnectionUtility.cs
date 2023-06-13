@@ -11,6 +11,7 @@ public static class ServerConnectionUtility
 {
     private static TcpClient _connection;
     private static Thread thread;
+    private static bool isRunning = true;
 
     public static void ConnectToServer(TcpClient Connection)
     {
@@ -21,7 +22,7 @@ public static class ServerConnectionUtility
             thread.Start();
 
             byte[] bytes = Encoding.UTF8.GetBytes(Environment.UserName);
-            NetworkStream stream = connection.GetStream();
+            NetworkStream stream = _connection.GetStream();
             stream.Write(bytes, 0, bytes.Length);
         }
         catch (Exception e)
@@ -54,15 +55,20 @@ public static class ServerConnectionUtility
         }
     }
 
+    public static void StopListening()
+    {
+        isRunning = false;
+        thread.Join(); // Wait for the thread to finish before continuing
+    }
+    
     public static void Disconnect(TcpClient Connection)
     {
         // Disconnect from server
         if (Connection.Connected)
         {
             if (thread.ThreadState == ThreadState.Running)
-            {
-                
-            }
+                StopListening();
+
             Connection.Close();
         }
     }
