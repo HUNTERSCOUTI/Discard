@@ -1,9 +1,7 @@
 ﻿#nullable disable
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows;
-using Client.MVVM.ViewModels;
 
 namespace Client.Networking.Utilities;
 
@@ -44,7 +42,7 @@ public static class ServerConnectionUtility
                 int read = connectionStream.Read(buffer, 0, buffer.Length);
                 if (read == 0) break;
                 string messageFromServer = Encoding.UTF8.GetString(buffer, 0, read);
-                //MAKE displayable on WPF HERE
+              
             }
 
             connectionStream.Close();
