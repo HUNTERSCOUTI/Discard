@@ -20,6 +20,7 @@ namespace Server
             // Open a tcp listener which allows any ip address to connect
             TcpListener listener = new(IPAddress.Loopback, Port);
             listener.Start();
+            
             PrintWithColor($"Server: Lytter på port: {Port}", ConsoleColor.Green);
             
             while (true)
@@ -28,6 +29,7 @@ namespace Server
 
                 //Gets the IP of the accepted client
                 IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
+                
                 PrintWithColor($"IP: {remoteIpEndPoint.Address}", ConsoleColor.DarkYellow);
 
                 NewClient(new UserModel(client, remoteIpEndPoint.Address.ToString()));
@@ -79,6 +81,7 @@ namespace Server
                 int read = stream.Read(buffer, 0, buffer.Length);
                 if (read == 0) break;
                 string recieve = Encoding.UTF8.GetString(buffer, 0, read);
+                
                 PrintWithColor($"User Message Received from {user.UserIP}", ConsoleColor.DarkGray);
 
                 return recieve;
