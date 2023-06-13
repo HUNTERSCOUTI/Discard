@@ -9,21 +9,13 @@ namespace Client.Networking
 {
     public class ClientConnection
     {
-        public TcpClient? Connection;
-        const int PORT = 31337;
-
-        void CreateConnection()
-        {
-            Connection = new TcpClient();
-            Connection.LingerState = new(true, 2);
-            Connection.Connect(IPAddress.Loopback, PORT);
-        }
+        private TcpClient? _connection;
 
         public void Run()
         {
             //Creates Connection then Connects to server
-            CreateConnection();
-            ConnectToServer(Connection);
+            _connection = CreateTcpConnection(IPAddress.Loopback);
+            ConnectToServer(_connection);
         }
 
         public void SendMessage(string message)
