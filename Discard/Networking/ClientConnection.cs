@@ -36,9 +36,7 @@ namespace Client.Networking
 
         public void DisconnectFromServer()
         {
-            if (Connection != null && Connection.Connected)
-                Connection.Close();
-            // Disconnect(Connection);
+            Disconnect(Connection);
         }
     }
 }
