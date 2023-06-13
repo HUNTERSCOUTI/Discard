@@ -12,15 +12,11 @@ public static class ServerConnectionUtility
     private static TcpClient _connection;
     private static Thread thread;
 
-    public static void ConnectToServer(IPAddress ip, int port, TcpClient Connection, LingerOption _LingerOption)
+    public static void ConnectToServer(TcpClient Connection)
     {
         _connection = Connection;
         try
         {
-            TcpClient connection = new TcpClient();
-            connection.LingerState = _LingerOption;
-            connection.Connect(ip, port);
-
             thread = new Thread(Listener);
             thread.Start();
 
@@ -48,8 +44,6 @@ public static class ServerConnectionUtility
                 if (read == 0) break;
                 string messageFromServer = Encoding.UTF8.GetString(buffer, 0, read);
                 //MAKE displayable on WPF HERE
-
-                GlobalChatVM.MessageHistory.Add(messageFromServer);
             }
 
             connectionStream.Close();
