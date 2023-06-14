@@ -11,6 +11,10 @@ public static class ServerConnectionUtility
     private static Thread _thread;
     private static bool _isRunning = true;
 
+    /// <summary>
+    /// Connects to the server using the specified TCP connection and starts a listener thread.
+    /// </summary>
+    /// <param name="connection">The TCP connection to use.</param>
     public static void ConnectToServer(TcpClient Connection)
     {
         _connection = Connection;
@@ -29,6 +33,9 @@ public static class ServerConnectionUtility
         }
     }
 
+    /// <summary>
+    /// Listens for incoming messages from the server.
+    /// </summary>
     private static void Listener()
     {
         try
@@ -51,12 +58,19 @@ public static class ServerConnectionUtility
         }
     }
 
+    /// <summary>
+    /// Stops the listener thread and waits for it to finish.
+    /// </summary>
     public static void StopListening()
     {
         _isRunning = false;
         _thread.Join(); // Wait for the thread to finish before continuing
     }
 
+    /// <summary>
+    /// Disconnects from the server, stops the listener thread, and closes the connection.
+    /// </summary>
+    /// <param name="connection">The TCP connection to disconnect from.</param>
     public static void Disconnect(TcpClient Connection)
     {
         //Stops the Running Thread

@@ -9,12 +9,13 @@ namespace Client.Networking
 {
     public class ClientConnection
     {
+        private const int PORT = 31337;
         private TcpClient? _connection;
 
         public void Run()
         {
             //Creates Connection then Connects to server
-            _connection = CreateTcpConnection(IPAddress.Loopback);
+            _connection = CreateTcpConnection(IPAddress.Loopback,PORT);
             ConnectToServer(_connection);
         }
 

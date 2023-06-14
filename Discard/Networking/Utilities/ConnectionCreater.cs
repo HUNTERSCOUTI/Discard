@@ -6,15 +6,19 @@ using System.Net.Sockets;
 
 public class ConnectionCreater
 {
-    private const int PORT = 31337;
-
-    public static TcpClient? CreateTcpConnection(IPAddress ip)
+    /// <summary>
+    /// Creates a TCP connection with the specified IP address and port number.
+    /// </summary>
+    /// <param name="ip">The IP address to connect to.</param>
+    /// <param name="port">The port number to connect to.</param>
+    /// <returns>A TcpClient object representing the connection, or null if an error occurs.</returns>
+    public static TcpClient? CreateTcpConnection(IPAddress ip, int port)
     {
         try
         {
             TcpClient? connection = new TcpClient();
             connection.LingerState = new LingerOption(true, 2);
-            connection.Connect(ip, PORT);
+            connection.Connect(ip, port);
 
             return connection;
         }

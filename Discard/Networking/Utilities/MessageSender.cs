@@ -6,6 +6,11 @@ namespace Client.Networking.Utilities;
 
 public static class MessageSender
 {
+    /// <summary>
+    /// Sends a message to the server through the specified TCP connection.
+    /// </summary>
+    /// <param name="message">The message to send.</param>
+    /// <param name="connection">The TCP connection to use.</param>
     public static void SendMessageToServer(string message, TcpClient? Connection)
     {
         try
