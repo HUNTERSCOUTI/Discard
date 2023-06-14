@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 
 #pragma warning disable
-namespace Client.MVVM.Utilities;
+namespace Client.Utilities;
 
 public class RelayCommand : ICommand
 {

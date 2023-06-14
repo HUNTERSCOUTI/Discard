@@ -1,8 +1,8 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+
 #pragma warning disable
-namespace Client.MVVM.Utilities;
+namespace Client.Utilities;
 
 public class ViewModelBase : INotifyPropertyChanged
 {

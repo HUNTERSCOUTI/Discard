@@ -1,13 +1,13 @@
 ﻿#pragma warning disable
 using System.Windows.Media.Imaging;
 using DiscardSERVER.Class_Models;
-using Client.MVVM.Utilities;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using Client.MVVM.Models;
 using System.Windows;
 using Client.Networking;
+using Client.Utilities;
 
 namespace Client.MVVM.ViewModels;
 

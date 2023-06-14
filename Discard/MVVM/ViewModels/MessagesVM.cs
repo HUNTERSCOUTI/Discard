@@ -2,15 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using DiscardSERVER.Class_Models;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Client.MVVM.Models;
-using Client.MVVM.Utilities;
-using DiscardSERVER.Class_Models;
+using Client.Utilities;
 
 namespace Client.MVVM.ViewModels;
 
