@@ -1,18 +1,13 @@
 ﻿#pragma warning disable
-using System;
-using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Media.Imaging;
 using DiscardSERVER.Class_Models;
-using Client.MVVM.Utilities;
 using System.ComponentModel;
-using System.Threading;
-using System.Windows.Media;
+using System.Diagnostics;
 using System.Windows.Input;
 using Client.MVVM.Models;
 using System.Windows;
 using Client.Networking;
-using RandomFriendlyNameGenerator;
+using Client.Utilities;
 
 namespace Client.MVVM.ViewModels;
 
@@ -31,8 +26,6 @@ public class MainVM : ViewModelBase
             OnPropertyChanged("Client");
         }
     }
-
-   
 
     private static Object _currentView { get; set; }
 
@@ -65,9 +58,9 @@ public class MainVM : ViewModelBase
 
     #region ICommands & Command Functions
 
-    public ICommand MoveWindowCommand  { get; set; }
+    public ICommand MoveWindowCommand { get; set; }
     public ICommand CloseWindowCommand { get; set; }
-    public ICommand GlobalChatCommand  { get; set; }
+    public ICommand GlobalChatCommand { get; set; }
 
 
     private void Global(Object obj) => CurrentView = new GlobalChatVM();
@@ -82,7 +75,8 @@ public class MainVM : ViewModelBase
     {
         Client.DisconnectFromServer();
 
-        Environment.Exit(0);
+        Process.GetCurrentProcess().Kill();
+
     }
 
     #endregion
@@ -90,7 +84,7 @@ public class MainVM : ViewModelBase
     #region Constructor
 
     public MainVM()
-    { 
+    {
         _dateAndTime = DateTime.Now;
         try
         {
@@ -134,7 +128,7 @@ public class MainVM : ViewModelBase
         for (int i = 0; i < 10; i++)
         {
             FriendModel friend = new FriendModel().NewGeneratedFried();
-            
+
             CurrentUser.FriendList.Add(friend);
         }
 

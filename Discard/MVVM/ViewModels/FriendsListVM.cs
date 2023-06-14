@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
-using Client.MVVM.Utilities;
+using Client.Utilities;
 using DiscardSERVER.Class_Models;
 
 #pragma warning disable
