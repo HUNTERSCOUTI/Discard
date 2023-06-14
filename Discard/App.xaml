@@ -9,11 +9,12 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="MVVM/Utilities/DataTemplate.xaml" />
+                <ResourceDictionary Source="Utilities/DataTemplate.xaml" />
 
-                <ResourceDictionary Source="MVVM/Styles/Button.xaml" />
-                <ResourceDictionary Source="MVVM/Styles/ListBox.xaml" />
-                <ResourceDictionary Source="MVVM/Styles/TextBlock.xaml" />
+                <ResourceDictionary Source="Styles/Button.xaml" />
+                <ResourceDictionary Source="Styles/ListBox.xaml" />
+                <ResourceDictionary Source="Styles/TextBlock.xaml" />
+
 
             </ResourceDictionary.MergedDictionaries>
 
