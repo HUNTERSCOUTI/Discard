@@ -29,7 +29,7 @@ public static class ServerConnectionUtility
         }
         catch (Exception e)
         {
-            MessageBox.Show($"⚠️Could not connect to the server!⚠️ \n Check IP And Port Number ...", "Error");
+            MessageBox.Show($"⚠️Could not connect to the server!⚠️ \n Check IP And Port Number ... \n{e.Message}", "Error");
         }
     }
 
